@@ -3,7 +3,7 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Phone, MapPin } from 'lucide-react';
 
 const CONTACT_INFO = [
   {
@@ -49,7 +49,7 @@ export default function ContactPage() {
               transition={{ delay: 0.1 }}
               className="font-serif-display text-[clamp(60px,10vw,120px)] leading-[0.9] uppercase tracking-tighter"
             >
-              Contact <br /> <span className="text-accent">Us.</span>
+              Contact <br /> Us.
             </motion.h1>
           </div>
 
@@ -83,8 +83,9 @@ export default function ContactPage() {
                     <textarea rows={5} className="w-full bg-[#F5F0E8]/50 border-none rounded-2xl px-6 py-4 font-condensed text-lg focus:ring-2 focus:ring-accent outline-none transition-all resize-none" placeholder="Tell us how we can help..."></textarea>
                   </div>
                   <button className="bg-accent hover:bg-[#A3501F] text-white w-full py-5 rounded-2xl font-condensed font-black text-xl uppercase tracking-widest transition-all transform hover:-translate-y-1 shadow-lg hover:shadow-xl flex items-center justify-center gap-3">
-                    Send Message <Send size={20} />
+                    Send Message
                   </button>
+
                 </form>
               </div>
             </motion.div>

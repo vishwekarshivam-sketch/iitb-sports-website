@@ -176,7 +176,7 @@ export default function HomePage() {
           </motion.div>
 
           {/* Right Content (5 columns) */}
-          <div className="lg:col-span-5 relative h-full min-h-[500px] flex items-center">
+          <div className="lg:col-span-5 relative h-full min-h-[500px] flex items-center lg:translate-x-12">
             <motion.div 
               initial={{ opacity: 0, scale: 0.9, rotate: 2 }}
               animate={{ opacity: 1, scale: 1, rotate: 0 }}
@@ -231,7 +231,6 @@ export default function HomePage() {
                 className="absolute bottom-8 left-8 right-8 z-20 bg-white p-8 shadow-2xl rounded-2xl overflow-hidden group/card"
               >
                 <div className="absolute top-0 left-0 w-1.5 h-full bg-accent" />
-                <span className="font-mono-custom text-[10px] uppercase tracking-[0.2em] text-accent mb-3 block font-bold">NEXT UPCOMING EVENT</span>
                 <div className="flex justify-between items-end">
                   <div>
                     <AnimatePresence mode="wait">
@@ -305,15 +304,9 @@ export default function HomePage() {
                       className="h-auto w-full object-contain"
                     />
                   </div>
-                  <span className="mt-8 block font-mono-custom text-[10px] font-black uppercase tracking-[0.3em] text-accent">
-                    Established · 1958
-                  </span>
                 </div>
 
                 <div className="flex flex-col justify-center lg:col-span-7">
-                  <span className="mb-5 block font-mono-custom text-[11px] font-black uppercase tracking-[0.3em] text-accent">
-                    IIT BOMBAY SPORTS
-                  </span>
                   <h2 className="mb-10 font-serif-display text-[clamp(48px,6vw,80px)] leading-[1.02] text-[#111111]">
                     The Heartbeat of Excellence on Campus.
                   </h2>
@@ -398,9 +391,6 @@ export default function HomePage() {
             >
               <div className="mx-auto flex h-full max-w-[1400px] flex-col justify-between">
                 <div>
-                  <span className="mb-6 block font-mono-custom text-[10px] font-black uppercase tracking-[0.3em] text-accent">
-                    DIGITAL ECOSYSTEM
-                  </span>
                   <div className="max-w-6xl">
                     <span className="block font-serif-display text-[clamp(64px,9vw,120px)] leading-[0.94]">
                       Your Season,

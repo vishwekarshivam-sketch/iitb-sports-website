@@ -365,12 +365,6 @@ export default function CourtStatusPage() {
               transition={{ duration: 1 }}
               className="flex flex-col items-center"
             >
-              <div className="flex items-center gap-3 mb-8">
-                <Smartphone className="text-accent" size={24} />
-                <span className="font-mono-custom text-accent text-xs tracking-[0.4em] uppercase font-black">
-                  THE SPORTS APP
-                </span>
-              </div>
               <h2 className="font-serif-display text-[clamp(48px,6vw,84px)] text-[#F5F0E8] leading-[0.95] mb-8">
                 Your Arena,<br />
                 <span className="text-accent">Anywhere.</span>

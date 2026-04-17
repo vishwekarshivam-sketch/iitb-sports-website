@@ -48,9 +48,6 @@ export default function SportsDirectoryPage() {
               transition={{ duration: 1, delay: 0.4 }}
               className="lg:col-span-4 lg:text-right"
             >
-              <div className="inline-block border border-accent/30 px-6 py-4 rounded-2xl mb-8">
-                <span className="font-mono-custom text-accent text-[10px] uppercase tracking-[0.2em] font-black">14 SPORTS · 4 CLUBS</span>
-              </div>
               <p className="text-xl leading-[1.7] text-[#F5F0E8]/50 max-w-sm ml-auto">
                 From the Olympic pool to the cricket crease — explore every team and facility at IIT Bombay.
               </p>
@@ -94,17 +91,12 @@ export default function SportsDirectoryPage() {
                     <span className="font-condensed font-black text-8xl text-white/10 uppercase tracking-tighter">{sport.name[0]}</span>
                   </div>
                   <div className="absolute inset-0 flex flex-col justify-end p-6 translate-y-3 opacity-0 group-hover/card:translate-y-0 group-hover/card:opacity-100 transition-all duration-400">
-                    <span className="font-mono-custom text-accent text-[9px] uppercase tracking-[0.4em] font-black mb-1">STATUS: ACTIVE</span>
                     <h4 className="font-condensed font-black text-xl text-white uppercase tracking-wider">{sport.achievement}</h4>
                   </div>
                 </motion.div>
 
                 {/* Content */}
                 <div className={`flex flex-1 min-w-0 flex-col ${isEven ? 'items-start' : 'items-end text-right'}`}>
-                  <div className={`flex items-center gap-3 mb-4 ${isEven ? '' : 'flex-row-reverse'}`}>
-                    <span className="font-mono-custom text-accent text-[10px] uppercase tracking-[0.3em] font-black">{sport.label}</span>
-                    <div className="h-px w-8 bg-accent/30" />
-                  </div>
                   <span className="font-mono-custom text-[#111111]/25 text-[10px] tracking-[0.4em] uppercase font-black mb-3">{sport.year}</span>
                   <h2 className="font-serif-display text-[clamp(48px,5vw,80px)] uppercase tracking-[-0.02em] leading-[0.9] mb-6">
                     {sport.name}
@@ -126,7 +118,6 @@ export default function SportsDirectoryPage() {
       <section className="bg-[#111111] py-32 px-6 md:px-12 lg:px-24 relative overflow-hidden">
         <div className="max-w-[1400px] mx-auto relative z-10">
            <div className="mb-20">
-              <span className="font-mono-custom text-accent text-xs tracking-[0.4em] uppercase font-black mb-8 block">CLUB DIRECTORY</span>
               <h2 className="font-serif-display text-5xl md:text-7xl text-[#F5F0E8] leading-[1.1]">
                 Also at <span className="underline decoration-accent decoration-4 underline-offset-[16px]">IIT Bombay.</span>
               </h2>

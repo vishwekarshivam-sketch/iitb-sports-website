@@ -83,13 +83,9 @@ export default function BlogsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
           >
-            <div className="flex items-center gap-4 mb-8">
-              <div className="w-12 h-px bg-accent" />
-              <span className="font-mono-custom text-accent text-[10px] tracking-[0.5em] uppercase font-black">THE EDITORIAL</span>
-            </div>
             <h1 className="font-serif-display text-[clamp(64px,12vw,160px)] leading-[0.85] uppercase tracking-[-0.04em] text-[#F5F0E8] mb-12">
               SPORTS<br />
-              <span className="text-accent italic normal-case tracking-normal">Gazette.</span>
+              <span className="text-accent normal-case tracking-normal">Gazette.</span>
             </h1>
             <p className="font-mono-custom text-[#F5F0E8]/40 text-xs tracking-[0.2em] uppercase font-bold max-w-sm leading-relaxed border-l border-accent/30 pl-6">
               Official records, highlights, and insights from the heart of the IIT Bombay sports community.
@@ -130,8 +126,7 @@ export default function BlogsPage() {
               <SportBadge text={BLOG_POSTS[0].imageText} />
               
               <div className="absolute bottom-8 left-8 z-20">
-                <span className="font-mono-custom text-[9px] text-white/60 uppercase tracking-[0.4em] block mb-2">PUBLISHED</span>
-                <span className="font-mono-custom text-xs text-accent uppercase tracking-[0.2em] font-black">{BLOG_POSTS[0].date}</span>
+                <span className="font-mono-custom text-xs text-white/60 uppercase tracking-[0.2em] font-black">{BLOG_POSTS[0].date}</span>
               </div>
             </div>
             
@@ -140,10 +135,6 @@ export default function BlogsPage() {
                 <div className="font-condensed font-black text-8xl uppercase tracking-tighter">01</div>
               </div>
               
-              <span className="font-mono-custom text-accent text-[10px] tracking-[0.3em] uppercase font-black mb-6 flex items-center gap-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-                FEATURED STORY
-              </span>
               <h3 className="font-serif-display text-4xl md:text-5xl lg:text-6xl mb-8 leading-[0.95] text-[#111111] tracking-[-0.02em]">
                 {BLOG_POSTS[0].title}.
               </h3>
@@ -189,7 +180,7 @@ export default function BlogsPage() {
             </div>
             <div className="p-8 flex flex-col">
               <div className="flex items-center justify-between mb-6">
-                <span className="font-mono-custom text-accent text-[10px] tracking-[0.3em] uppercase font-black">{BLOG_POSTS[1].date}</span>
+                <span className="font-mono-custom text-[10px] tracking-[0.3em] uppercase font-black text-[#111111]/40">{BLOG_POSTS[1].date}</span>
                 <div className="flex gap-2">
                   {BLOG_POSTS[1].tags.map(t => (
                     <span key={t} className="font-mono-custom text-[9px] uppercase tracking-widest text-[#111111]/40 font-bold italic">#{t}</span>
@@ -224,7 +215,7 @@ export default function BlogsPage() {
                 <SportBadge text={BLOG_POSTS[2].imageText} />
               </div>
               <div className="p-8">
-                <span className="font-mono-custom text-accent text-[9px] tracking-[0.3em] uppercase font-black mb-3 block">{BLOG_POSTS[2].date}</span>
+                <span className="font-mono-custom text-[9px] tracking-[0.3em] uppercase font-black mb-3 block text-[#111111]/40">{BLOG_POSTS[2].date}</span>
                 <h3 className="font-serif-display text-2xl text-[#111111] mb-4 leading-tight">{BLOG_POSTS[2].title}.</h3>
                 <Link href="/blogs/1" className="font-mono-custom text-[9px] font-black uppercase tracking-[0.2em] border-b border-accent/20 pb-0.5 hover:border-accent transition-all">
                   LEARN MORE
@@ -279,7 +270,6 @@ export default function BlogsPage() {
               <div className="max-w-2xl">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-12 h-px bg-accent" />
-                  <span className="font-mono-custom text-accent text-[10px] tracking-[0.4em] uppercase font-black">{BLOG_POSTS[3].imageText}</span>
                 </div>
                 <h3 className="font-serif-display text-4xl md:text-6xl text-[#F5F0E8] leading-[0.95] mb-8">
                   {BLOG_POSTS[3].title}.

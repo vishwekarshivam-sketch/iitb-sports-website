@@ -77,7 +77,7 @@ export default function LegalPage() {
               transition={{ delay: 0.1 }}
               className="font-serif-display text-[clamp(60px,10vw,120px)] leading-[0.9] uppercase tracking-tighter"
             >
-              Terms & <br /> <span className="text-accent">Privacy.</span>
+              Terms & <br /> Privacy.
             </motion.h1>
           </div>
 

@@ -189,9 +189,6 @@ export default function EventsPage() {
           <div className="max-w-[1400px] mx-auto">
             <div className="flex items-end justify-between mb-6">
               <div>
-                <span className="font-mono-custom text-accent text-[11px] tracking-[0.4em] uppercase font-black mb-2 block">
-                  HAPPENING TODAY
-                </span>
                 <h2 className="font-serif-display text-3xl md:text-4xl text-[#111111] leading-tight">
                   Friday, <span className="text-accent">April 17</span>
                 </h2>
@@ -272,9 +269,6 @@ export default function EventsPage() {
         <div className="max-w-[1400px] mx-auto">
           <div className="flex items-end justify-between mb-10">
             <div>
-              <span className="font-mono-custom text-accent text-[11px] tracking-[0.4em] uppercase font-black mb-2 block">
-                THIS WEEK
-              </span>
               <h2 className="font-serif-display text-3xl md:text-4xl text-[#111111] leading-tight">
                 Full <span className="text-accent">agenda.</span>
               </h2>
@@ -429,9 +423,6 @@ export default function EventsPage() {
         <div className="max-w-[1400px] mx-auto relative z-10">
           <div className="flex items-end justify-between mb-12">
             <div>
-              <span className="font-mono-custom text-accent text-[11px] tracking-[0.4em] uppercase font-black mb-3 block">
-                DIRECTORY
-              </span>
               <h2 className="font-serif-display text-3xl md:text-4xl text-[#F5F0E8] leading-tight">
                 Sport <span className="text-accent">categories.</span>
               </h2>

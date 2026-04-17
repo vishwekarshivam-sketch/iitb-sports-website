@@ -104,7 +104,6 @@ export default function YearbookPage() {
 
                 <div className={`space-y-10 ${idx % 2 !== 0 ? 'lg:col-start-1 lg:col-span-5 lg:row-start-1' : 'lg:col-span-5'}`}>
                   <div className="space-y-6">
-                    <span className="font-mono-custom text-xs font-black text-accent uppercase tracking-[0.4em]">Latest Edition</span>
                     <h2 className="font-serif-display text-6xl md:text-8xl leading-[0.85] tracking-tighter uppercase">{chapter.title}</h2>
                     <p className="font-iitb-text text-xl md:text-2xl text-[#111111]/60 leading-relaxed max-w-lg">
                       {chapter.description}
@@ -126,7 +125,7 @@ export default function YearbookPage() {
                       target="_blank"
                       className="inline-flex items-center gap-4 bg-[#111111] text-white px-12 py-6 rounded-full font-condensed font-black text-xl uppercase tracking-widest hover:bg-accent transition-all transform hover:-translate-y-1 shadow-xl"
                     >
-                      Download PDF <Download size={22} />
+                      READ THE FULL RECORD <Download size={22} />
                     </a>
                   </div>
                 </div>
@@ -142,7 +141,6 @@ export default function YearbookPage() {
           <div className="max-w-[1400px] mx-auto">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-20">
               <div>
-                <span className="font-mono-custom text-accent text-xs tracking-[0.4em] uppercase font-black mb-6 block">Visual Archive</span>
                 <h2 className="font-serif-display text-5xl md:text-7xl text-[#F5F0E8] leading-tight">
                   The Scrapbook <br /> <span className="text-accent">Memories.</span>
                 </h2>
@@ -169,7 +167,7 @@ export default function YearbookPage() {
                     src={memory.image} 
                     alt={memory.caption} 
                     fill 
-                    className="object-cover transition-all duration-700 scale-110 group-hover:scale-100 opacity-60 group-hover:opacity-100" 
+                    className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100 opacity-60 group-hover:opacity-100" 
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
                     <p className="text-white font-condensed font-black uppercase tracking-widest text-sm">{memory.caption}</p>

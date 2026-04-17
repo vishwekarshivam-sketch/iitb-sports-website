@@ -250,9 +250,6 @@ export default function AquaticsPage() {
         </div>
 
         <div className="relative mx-auto max-w-[1400px]">
-          <span className="mb-4 block font-mono-custom text-[11px] font-black uppercase tracking-[0.35em] text-accent">
-            → Overview
-          </span>
           <h2 className="mb-16 font-serif-display text-[clamp(48px,7vw,96px)] font-black uppercase leading-[0.92] tracking-[-0.03em] text-[#111111]">
             About<br />the Club
           </h2>
@@ -299,9 +296,6 @@ export default function AquaticsPage() {
         </div>
 
         <div className="relative mx-auto max-w-[1400px]">
-          <span className="mb-4 block font-mono-custom text-[11px] font-black uppercase tracking-[0.35em] text-accent">
-            → Infrastructure
-          </span>
           <h2 className="mb-16 font-serif-display text-[clamp(48px,7vw,96px)] font-black uppercase leading-[0.92] tracking-[-0.03em] text-[#111111]">
             Facilities
           </h2>
@@ -332,9 +326,6 @@ export default function AquaticsPage() {
         </div>
 
         <div className="relative mx-auto max-w-[1400px]">
-          <span className="mb-4 block font-mono-custom text-[11px] font-black uppercase tracking-[0.35em] text-accent">
-            → Schedule
-          </span>
           <h2 className="mb-16 font-serif-display text-[clamp(48px,7vw,96px)] font-black uppercase leading-[0.92] tracking-[-0.03em] text-[#F5F0E8]">
             Pool<br />Timing
           </h2>
@@ -382,9 +373,6 @@ export default function AquaticsPage() {
         </div>
 
         <div className="relative mx-auto max-w-[1400px]">
-          <span className="mb-4 block font-mono-custom text-[11px] font-black uppercase tracking-[0.35em] text-accent">
-            → Calendar
-          </span>
           <h2 className="mb-16 font-serif-display text-[clamp(48px,7vw,96px)] font-black uppercase leading-[0.92] tracking-[-0.03em] text-[#111111]">
             Events
           </h2>
@@ -419,9 +407,6 @@ export default function AquaticsPage() {
         </div>
 
         <div className="relative mx-auto max-w-[1400px]">
-          <span className="mb-4 block font-mono-custom text-[11px] font-black uppercase tracking-[0.35em] text-accent">
-            → Legacy
-          </span>
           <h2 className="mb-16 font-serif-display text-[clamp(48px,7vw,96px)] font-black uppercase leading-[0.92] tracking-[-0.03em] text-[#F5F0E8]">
             Achievements
           </h2>
@@ -460,9 +445,6 @@ export default function AquaticsPage() {
         </div>
 
         <div className="relative mx-auto max-w-[1400px]">
-          <span className="mb-4 block font-mono-custom text-[11px] font-black uppercase tracking-[0.35em] text-accent">
-            → Get in Touch
-          </span>
           <h2 className="mb-16 font-serif-display text-[clamp(48px,7vw,96px)] font-black uppercase leading-[0.92] tracking-[-0.03em] text-[#111111]">
             Contact
           </h2>
@@ -508,9 +490,6 @@ export default function AquaticsPage() {
         </div>
 
         <div className="relative mx-auto max-w-[1400px]">
-          <span className="mb-4 block font-mono-custom text-[11px] font-black uppercase tracking-[0.35em] text-accent">
-            → Rules & Regulations
-          </span>
           <h2 className="mb-12 font-serif-display text-[clamp(48px,7vw,96px)] font-black uppercase leading-[0.92] tracking-[-0.03em] text-[#F5F0E8]">
             Pool Rules
           </h2>

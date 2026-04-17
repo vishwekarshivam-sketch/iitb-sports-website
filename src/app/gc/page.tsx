@@ -94,10 +94,6 @@ export default function GCPage() {
         <div className="relative z-10 max-w-[1400px] mx-auto">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-20">
              <div>
-                <div className="inline-flex items-center gap-3 border border-accent/30 bg-accent/05 px-4 py-2 mb-6">
-                   <div className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-                   <span className="font-mono-custom text-accent text-[10px] uppercase tracking-[0.3em] font-black">CHAMPIONS PODIUM ({activeGender})</span>
-                </div>
                 <h2 className="font-serif-display text-5xl md:text-7xl text-[#111111] leading-tight">
                   This Year&apos;s<br /><span>Top Three.</span>
                 </h2>
@@ -192,7 +188,6 @@ export default function GCPage() {
         <div className="relative z-10 max-w-5xl mx-auto">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
              <div>
-                <span className="font-mono-custom text-accent text-xs tracking-[0.3em] uppercase font-black mb-6 block">FULL LEADERBOARD</span>
                 <h2 className="font-serif-display text-5xl md:text-7xl text-[#111]">Overall <span>Standings.</span></h2>
              </div>
              <div className="flex bg-white p-1 rounded-full border border-[#111111]/10">
@@ -280,7 +275,6 @@ export default function GCPage() {
         </div>
         <div className="relative z-10 max-w-[1400px] mx-auto">
           <div className="mb-20">
-             <span className="font-mono-custom text-accent text-xs tracking-[0.4em] uppercase font-black mb-6 block">SPORT-SPECIFIC RESULTS</span>
              <h2 className="font-serif-display text-5xl md:text-7xl text-[#F5F0E8] leading-[1.1]">
                Detailed <span>Breakdown.</span>
              </h2>
@@ -310,7 +304,6 @@ export default function GCPage() {
             
             <div className="md:col-span-4 p-12 border-b md:border-b-0 md:border-r border-white/05 relative group">
               <div className="absolute inset-0 bg-accent/05 opacity-0 group-hover:opacity-100 transition-opacity" />
-              <span className="font-mono-custom text-[10px] text-accent uppercase tracking-[0.3em] font-black mb-6 block">WINNER</span>
               <h3 className="font-condensed font-black text-8xl text-accent mb-4 tracking-tighter">
                 {currentResult.winner}
               </h3>

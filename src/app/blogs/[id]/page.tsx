@@ -96,9 +96,6 @@ export default function ArticlePage() {
               <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
             </Link>
             <div className="h-px w-12 bg-accent/60" />
-            <span className="font-mono-custom text-accent text-[10px] tracking-[0.4em] uppercase font-black">
-              {post.category}
-            </span>
           </div>
           
           <h1 className="font-serif-display text-[clamp(48px,8vw,100px)] leading-[0.9] text-[#F5F0E8] uppercase tracking-[-0.04em] mb-10 max-w-5xl">
@@ -166,7 +163,6 @@ export default function ArticlePage() {
                     <path d="M7 17L17 7M17 7H7M17 7V17" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                  </svg>
                </div>
-               <span className="font-mono-custom text-accent text-[9px] tracking-[0.4em] uppercase font-black mb-6 block">NEXT UP</span>
                <h4 className="font-serif-display text-2xl mb-8 leading-tight uppercase">Inter-Hostel Football Showdown.</h4>
                <Link href="/blogs/2" className="inline-flex items-center gap-3 font-mono-custom text-[10px] font-black uppercase tracking-[0.2em] text-accent hover:gap-5 transition-all">
                  READ ARTICLE <span>→</span>
@@ -177,19 +173,16 @@ export default function ArticlePage() {
                <span className="font-mono-custom text-[#111111]/40 text-[9px] tracking-[0.4em] uppercase font-black mb-8 block">THE GAZETTE</span>
                <div className="space-y-8">
                  <div className="group cursor-pointer">
-                    <span className="font-mono-custom text-accent text-[8px] tracking-[0.2em] uppercase font-black block mb-2">AUGUST 2024</span>
                     <h5 className="font-serif-display text-lg text-[#111111] group-hover:text-accent transition-colors leading-tight">UG Sports Orientation: A New Beginning.</h5>
                  </div>
                  <div className="h-px w-full bg-[#111111]/05" />
                  <div className="group cursor-pointer">
-                    <span className="font-mono-custom text-accent text-[8px] tracking-[0.2em] uppercase font-black block mb-2">JULY 2024</span>
                     <h5 className="font-serif-display text-lg text-[#111111] group-hover:text-accent transition-colors leading-tight">PG Mania 2025: Weekend Warriors.</h5>
                  </div>
                </div>
             </div>
 
             <div className="p-10">
-               <span className="font-mono-custom text-accent text-[9px] tracking-[0.4em] uppercase font-black mb-6 block">CREDITS</span>
                <div className="space-y-4">
                  <div className="flex flex-col">
                    <span className="font-mono-custom text-[8px] text-[#111111]/40 uppercase tracking-widest font-bold">WRITER</span>

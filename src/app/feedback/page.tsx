@@ -3,7 +3,7 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { motion } from 'framer-motion';
-import { MessageSquare, Send, Heart, AlertCircle, Lightbulb } from 'lucide-react';
+import { MessageSquare, Heart, AlertCircle, Lightbulb } from 'lucide-react';
 import { useState } from 'react';
 
 const FEEDBACK_TYPES = [
@@ -34,7 +34,7 @@ export default function FeedbackPage() {
               transition={{ delay: 0.1 }}
               className="font-serif-display text-[clamp(60px,10vw,120px)] leading-[0.9] uppercase tracking-tighter"
             >
-              Speak <br /> Your <span className="text-accent">Mind.</span>
+              Speak <br /> Your Mind.
             </motion.h1>
           </div>
 
@@ -109,7 +109,7 @@ export default function FeedbackPage() {
                     <textarea rows={6} className="w-full bg-[#F5F0E8]/50 border-none rounded-2xl px-6 py-4 font-condensed text-lg focus:ring-2 focus:ring-accent outline-none transition-all resize-none" placeholder="Share your thoughts with us..."></textarea>
                   </div>
                   <button className="bg-accent hover:bg-[#A3501F] text-white w-full py-5 rounded-2xl font-condensed font-black text-xl uppercase tracking-widest transition-all transform hover:-translate-y-1 shadow-lg hover:shadow-xl flex items-center justify-center gap-3">
-                    Submit Feedback <Send size={20} />
+                    Submit Feedback
                   </button>
                 </form>
               </div>
