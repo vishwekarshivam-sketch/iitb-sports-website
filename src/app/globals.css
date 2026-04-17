@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #000000;
+  --color-foreground: #ffffff;
+  --color-accent: #C4622D;
+  --color-text-muted: rgba(255, 255, 255, 0.55);
+}
+
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+  --bg-overlay: rgba(0, 0, 0, 0.6);
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.55);
+  --accent: #C4622D;
+  --cta-border: #ffffff;
+}
+
+/* 
+   IITB Sport Font System 
+   Mapping the variables injected by next/font/local (on the html tag)
+   to semantic variables used throughout the app.
+*/
+:root {
+  --font-display: var(--font-iitb-display), sans-serif;
+  --font-heading: var(--font-iitb-heading), sans-serif;
+  --font-text: var(--font-iitb-display-text), sans-serif;
+  --font-mono: var(--font-iitb-mono), monospace;
+  --font-caption: var(--font-iitb-caption), sans-serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Cream background with sport-themed outline pattern */
+.bg-cream {
+  background-color: #F5F0E8;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='900' height='900'><g fill='none' stroke='rgba(100,55,10,0.11)' stroke-width='1.2'><!-- Tennis ball: circle + two curved seams --><circle cx='130' cy='130' r='55'/><path d='M80,105 Q130,155 180,105'/><path d='M80,155 Q130,105 180,155'/><!-- Badminton shuttlecock: cork circle + feather cone lines --><circle cx='700' cy='150' r='18'/><line x1='700' y1='132' x2='660' y2='60'/><line x1='700' y1='132' x2='680' y2='55'/><line x1='700' y1='132' x2='700' y2='52'/><line x1='700' y1='132' x2='720' y2='55'/><line x1='700' y1='132' x2='740' y2='60'/><ellipse cx='700' cy='62' rx='40' ry='10'/><!-- Basketball: circle + 3 curved lines --><circle cx='200' cy='720' r='65'/><path d='M200,655 Q260,720 200,785'/><path d='M200,655 Q140,720 200,785'/><line x1='135' y1='720' x2='265' y2='720'/><!-- Football (soccer): circle + pentagon hint --><circle cx='750' cy='680' r='60'/><polygon points='750,640 780,660 770,695 730,695 720,660' stroke='rgba(100,55,10,0.11)' stroke-width='1.2'/><line x1='750' y1='640' x2='750' y2='620'/><line x1='780' y1='660' x2='798' y2='650'/><line x1='770' y1='695' x2='782' y2='710'/><line x1='730' y1='695' x2='718' y2='710'/><line x1='720' y1='660' x2='702' y2='650'/><!-- Running track oval --><ellipse cx='450' cy='450' rx='200' ry='100'/><ellipse cx='450' cy='450' rx='160' ry='68'/></g></svg>");
+  background-repeat: repeat;
+  background-size: 900px 900px;
+}
+
+/* 
+   LEGACY MAPPING 
+   Mapping existing utility classes to the new IITB Sport system 
+*/
+
+.font-serif-display,
+.font-hero {
+  font-family: var(--font-display) !important;
+  font-weight: 800;
+}
+
+.font-serif-italic {
+  font-family: var(--font-text) !important;
+  font-weight: 400;
+}
+
+.font-condensed {
+  font-family: var(--font-heading) !important;
+  font-weight: 600;
+}
+
+.font-mono-custom {
+  font-family: var(--font-mono) !important;
+  font-weight: 700;
+}
+
+.font-baskerville {
+  font-family: var(--font-text) !important;
+}
+
+/* NEW SEMANTIC CLASSES */
+
+.font-iitb-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+}
+
+.font-iitb-heading {
+  font-family: var(--font-heading);
+  font-weight: 600;
+}
+
+.font-iitb-text {
+  font-family: var(--font-text);
+  font-weight: 400;
+}
+
+.font-iitb-mono {
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
+.font-iitb-caption {
+  font-family: var(--font-caption);
+  font-weight: 300;
+}
