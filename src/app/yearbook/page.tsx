@@ -62,6 +62,7 @@ export default function YearbookPage() {
                 Sports <br /> <span className="normal-case tracking-normal">Yearbook.</span>
               </motion.h1>
             </div>
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
