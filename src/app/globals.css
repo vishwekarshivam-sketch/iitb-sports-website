@@ -38,10 +38,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Cream background with sport-themed outline pattern */
+/* Cream background with topographic contour overlay */
 .bg-cream {
   background-color: #F5F0E8;
-  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='800' viewBox='0 0 800 800'><g fill='none' stroke='rgba(100,55,10,0.08)' stroke-width='1.2'><!-- Professional Tennis Ball --><circle cx='120' cy='120' r='50'/><path d='M84.6,84.6 C105,120 135,120 155.4,84.6'/><path d='M84.6,155.4 C105,120 135,120 155.4,155.4'/><!-- Detailed Shuttlecock --><path d='M680,180 Q700,190 720,180 L740,100 Q700,80 660,100 Z'/><line x1='680' y1='180' x2='665' y2='110'/><line x1='690' y1='185' x2='685' y2='105'/><line x1='700' y1='188' x2='700' y2='100'/><line x1='710' y1='185' x2='715' y2='105'/><line x1='720' y1='180' x2='735' y2='110'/><circle cx='700' cy='190' r='12'/><!-- Realistic Basketball --><circle cx='150' cy='650' r='60'/><path d='M100,650 A60,60 0 0,1 200,650'/><path d='M100,650 A60,60 0 0,0 200,650'/><path d='M150,590 A60,60 0 0,1 150,710'/><path d='M150,590 A60,60 0 0,0 150,710'/><!-- Detailed Football (Geometric) --><circle cx='680' cy='650' r='60'/><path d='M680,590 L715,615 L705,655 L655,655 L645,615 Z' stroke-width='0.8'/><line x1='680' y1='590' x2='680' y2='570'/><line x1='715' y1='615' x2='735' y2='605'/><line x1='705' y1='655' x2='725' y2='675'/><line x1='655' y1='655' x2='635' y2='675'/><line x1='645' y1='615' x2='625' y2='605'/><path d='M680,710 L705,690' stroke-width='0.8'/><path d='M680,710 L655,690' stroke-width='0.8'/><!-- Track Curve --><path d='M300,300 A400,200 0 0,1 700,500' stroke-dasharray='10 15'/></g></svg>");
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='800'><g fill='none' stroke='rgba(100,55,10,0.11)' stroke-width='1.2'><ellipse cx='400' cy='400' rx='380' ry='200'/><ellipse cx='400' cy='400' rx='320' ry='155'/><ellipse cx='400' cy='400' rx='260' ry='112'/><ellipse cx='400' cy='400' rx='200' ry='72'/><ellipse cx='400' cy='400' rx='140' ry='38'/><ellipse cx='130' cy='160' rx='120' ry='70'/><ellipse cx='130' cy='160' rx='80' ry='44'/><ellipse cx='130' cy='160' rx='40' ry='20'/><ellipse cx='670' cy='640' rx='130' ry='75'/><ellipse cx='670' cy='640' rx='85' ry='46'/><ellipse cx='670' cy='640' rx='42' ry='22'/></g></svg>");
   background-repeat: repeat;
   background-size: 800px 800px;
 }
