@@ -38,12 +38,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Cream background with topographic contour overlay */
+/* Cream background — plain, no pattern */
 .bg-cream {
   background-color: #F5F0E8;
-  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='800'><g fill='none' stroke='rgba(100,55,10,0.11)' stroke-width='1.2'><ellipse cx='400' cy='400' rx='380' ry='200'/><ellipse cx='400' cy='400' rx='320' ry='155'/><ellipse cx='400' cy='400' rx='260' ry='112'/><ellipse cx='400' cy='400' rx='200' ry='72'/><ellipse cx='400' cy='400' rx='140' ry='38'/><ellipse cx='130' cy='160' rx='120' ry='70'/><ellipse cx='130' cy='160' rx='80' ry='44'/><ellipse cx='130' cy='160' rx='40' ry='20'/><ellipse cx='670' cy='640' rx='130' ry='75'/><ellipse cx='670' cy='640' rx='85' ry='46'/><ellipse cx='670' cy='640' rx='42' ry='22'/></g></svg>");
+}
+
+/* Cream background with topographic contour overlay — selected pages only */
+.bg-cream-topo {
+  background-color: #F5F0E8;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='900' height='900'><g fill='none' stroke='rgba(100,55,10,0.10)' stroke-width='1.1'><ellipse cx='450' cy='450' rx='420' ry='220'/><ellipse cx='450' cy='450' rx='340' ry='165'/><ellipse cx='450' cy='450' rx='255' ry='110'/><ellipse cx='150' cy='170' rx='130' ry='75'/><ellipse cx='150' cy='170' rx='80' ry='42'/></g></svg>");
   background-repeat: repeat;
-  background-size: 800px 800px;
+  background-size: 900px 900px;
 }
 
 /* 

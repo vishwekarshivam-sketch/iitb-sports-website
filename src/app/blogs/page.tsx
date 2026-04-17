@@ -61,7 +61,7 @@ const SportBadge = ({ text }: { text: string }) => (
 
 export default function BlogsPage() {
   return (
-    <div className="min-h-screen bg-cream text-[#111111] selection:bg-accent selection:text-black font-iitb-text">
+    <div className="min-h-screen bg-cream-topo text-[#111111] selection:bg-accent selection:text-black font-iitb-text">
       <Navbar />
       
       {/* Grain Overlay */}

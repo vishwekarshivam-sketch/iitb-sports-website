@@ -25,7 +25,7 @@ export default function GCPage() {
   const currentResult = SPORT_RESULTS[activeSport] || SPORT_RESULTS['Basketball'];
 
   return (
-    <div className="min-h-screen bg-cream text-[#111111] selection:bg-accent selection:text-black">
+    <div className="min-h-screen bg-cream-topo text-[#111111] selection:bg-accent selection:text-black">
       <Navbar />
 
       {/* Hero Section */}
@@ -48,12 +48,9 @@ export default function GCPage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
           >
-            <span className="font-mono-custom text-accent text-xs tracking-[0.4em] uppercase font-black mb-6 block">
-              INTER-HOSTEL SPORTS CHAMPIONSHIP
-            </span>
             <h1 className="font-serif-display text-[clamp(64px,12vw,160px)] text-[#F5F0E8] uppercase leading-[0.9] tracking-[-0.03em] mb-12">
               GENERAL<br />
-              <span className="text-accent normal-case tracking-normal">Championship</span>
+              <span className="normal-case tracking-normal">Championship</span>
             </h1>
 
             <div className="flex flex-wrap gap-12 md:gap-24 items-end">
@@ -90,7 +87,7 @@ export default function GCPage() {
       </section>
 
       {/* Podium Section */}
-      <section className="bg-[#F5F0E8] py-32 px-6 md:px-12 lg:px-24 relative overflow-hidden">
+      <section className="py-32 px-6 md:px-12 lg:px-24 relative overflow-hidden">
         <div className="absolute top-12 left-12 font-condensed font-black text-[240px] text-accent/5 pointer-events-none leading-none select-none">
           01
         </div>
@@ -188,7 +185,7 @@ export default function GCPage() {
       </section>
 
       {/* Standings Table */}
-      <section className="py-32 px-6 md:px-12 lg:px-24 bg-[#F5F0E8] relative overflow-hidden">
+      <section className="py-32 px-6 md:px-12 lg:px-24 relative overflow-hidden">
         <div className="absolute top-12 left-12 font-condensed font-black text-[240px] text-[#111111]/[0.03] leading-none pointer-events-none select-none">
           02
         </div>

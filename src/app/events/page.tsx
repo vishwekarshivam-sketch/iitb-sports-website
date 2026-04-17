@@ -92,7 +92,7 @@ export default function EventsPage() {
   const totalEvents = filtered.reduce((sum, d) => sum + d.events.length, 0);
 
   return (
-    <div className="min-h-screen bg-cream text-[#111111] selection:bg-accent selection:text-black">
+    <div className="min-h-screen bg-cream-topo text-[#111111] selection:bg-accent selection:text-black">
       <Navbar />
 
       {/* Hero */}
@@ -111,12 +111,9 @@ export default function EventsPage() {
 
         <div className="max-w-[1400px] mx-auto relative z-10">
           <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1 }}>
-            <span className="font-mono-custom text-accent text-xs tracking-[0.4em] uppercase font-black mb-6 block">
-              SPORTS COUNCIL · ACADEMIC YEAR 2025–26
-            </span>
             <h1 className="font-serif-display text-[clamp(64px,12vw,160px)] text-[#F5F0E8] uppercase leading-[0.9] tracking-[-0.03em] mb-12">
               EVENTS<br />
-              <span className="text-accent normal-case tracking-normal">Timeline</span>
+              <span className="normal-case tracking-normal">Timeline</span>
             </h1>
 
             <div className="flex flex-wrap gap-12 md:gap-24 items-end">

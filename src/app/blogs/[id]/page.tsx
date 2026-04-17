@@ -71,7 +71,7 @@ export default function ArticlePage() {
   const headerOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-cream text-[#111111] selection:bg-accent selection:text-black font-iitb-text">
+    <div ref={containerRef} className="min-h-screen bg-cream-topo text-[#111111] selection:bg-accent selection:text-black font-iitb-text">
       <Navbar />
 
       {/* Hero Section */}

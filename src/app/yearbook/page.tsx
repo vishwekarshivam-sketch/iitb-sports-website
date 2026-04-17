@@ -40,7 +40,7 @@ const MEMORIES = [
 
 export default function YearbookPage() {
   return (
-    <div className="min-h-screen bg-cream text-[#111111] selection:bg-accent selection:text-white">
+    <div className="min-h-screen bg-cream-topo text-[#111111] selection:bg-accent selection:text-white">
       <Navbar />
 
       {/* Grain Overlay */}
@@ -84,53 +84,50 @@ export default function YearbookPage() {
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className={`flex flex-col lg:flex-row gap-16 items-center mb-40 ${idx % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}
+                className="grid lg:grid-cols-12 gap-16 lg:gap-24 items-center mb-48"
               >
-                <div className="flex-1 relative group">
-                  <div className="relative aspect-[4/5] overflow-hidden rounded-[40px] shadow-2xl">
+                <div className={`relative group ${idx % 2 !== 0 ? 'lg:col-start-6 lg:col-span-7' : 'lg:col-span-7'}`}>
+                  <div className="relative aspect-[16/10] md:aspect-[16/9] overflow-hidden rounded-[48px] shadow-[0_40px_100px_-15px_rgba(0,0,0,0.3)]">
                     <Image 
                       src={chapter.image} 
                       alt={chapter.title} 
                       fill 
-                      className="object-cover transition-transform duration-700 group-hover:scale-105 saturate-[0.85] group-hover:saturate-100" 
+                      className="object-cover transition-transform duration-700 group-hover:scale-105" 
                     />
-                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
+                    <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
                   </div>
                   {/* Floating Year Tag */}
-                  <div className="absolute -top-6 -right-6 md:-right-10 w-32 h-32 md:w-40 md:h-40 bg-accent rounded-full flex items-center justify-center rotate-12 shadow-xl">
-                    <span className="font-condensed font-black text-2xl md:text-3xl text-white tracking-widest">{chapter.year}</span>
+                  <div className="absolute -top-10 -right-10 w-40 h-40 md:w-48 md:h-48 bg-accent rounded-full flex items-center justify-center rotate-12 shadow-2xl z-10 border-8 border-[#F5F0E8]">
+                    <span className="font-condensed font-black text-3xl md:text-4xl text-white tracking-widest">{chapter.year}</span>
                   </div>
                 </div>
 
-                <div className="flex-1 space-y-8">
-                  <div className="space-y-4">
-                    <span className="font-mono-custom text-xs font-black text-accent uppercase tracking-[0.3em]">Latest Edition</span>
-                    <h2 className="font-serif-display text-5xl md:text-7xl leading-none">{chapter.title}</h2>
-                    <p className="font-iitb-text text-xl text-[#111111]/50 leading-relaxed max-w-lg">
+                <div className={`space-y-10 ${idx % 2 !== 0 ? 'lg:col-start-1 lg:col-span-5 lg:row-start-1' : 'lg:col-span-5'}`}>
+                  <div className="space-y-6">
+                    <span className="font-mono-custom text-xs font-black text-accent uppercase tracking-[0.4em]">Latest Edition</span>
+                    <h2 className="font-serif-display text-6xl md:text-8xl leading-[0.85] tracking-tighter uppercase">{chapter.title}</h2>
+                    <p className="font-iitb-text text-xl md:text-2xl text-[#111111]/60 leading-relaxed max-w-lg">
                       {chapter.description}
                     </p>
                   </div>
 
-                  <div className="grid grid-cols-3 gap-8 pt-8 border-t border-[#111111]/10">
+                  <div className="grid grid-cols-3 gap-10 pt-10 border-t border-[#111111]/10">
                     {chapter.stats.map(stat => (
                       <div key={stat.label}>
-                        <div className="font-condensed font-black text-4xl text-[#111111]">{stat.value}</div>
-                        <div className="font-mono-custom text-[9px] uppercase tracking-widest text-accent font-black mt-1">{stat.label}</div>
+                        <div className="font-condensed font-black text-5xl text-[#111111]">{stat.value}</div>
+                        <div className="font-mono-custom text-[10px] uppercase tracking-widest text-accent font-black mt-2">{stat.label}</div>
                       </div>
                     ))}
                   </div>
 
-                  <div className="flex flex-wrap gap-6 pt-8">
+                  <div className="flex flex-wrap gap-6 pt-10">
                     <a 
                       href="https://gymkhana.iitb.ac.in/sports/yearbook.pdf" 
                       target="_blank"
-                      className="inline-flex items-center gap-4 bg-[#111111] text-white px-10 py-5 rounded-full font-condensed font-black text-lg uppercase tracking-widest hover:bg-accent transition-all transform hover:-translate-y-1 shadow-lg"
+                      className="inline-flex items-center gap-4 bg-[#111111] text-white px-12 py-6 rounded-full font-condensed font-black text-xl uppercase tracking-widest hover:bg-accent transition-all transform hover:-translate-y-1 shadow-xl"
                     >
-                      Download PDF <Download size={20} />
+                      Download PDF <Download size={22} />
                     </a>
-                    <button className="inline-flex items-center gap-4 border-2 border-[#111111]/10 px-10 py-5 rounded-full font-condensed font-black text-lg uppercase tracking-widest hover:border-accent hover:text-accent transition-all">
-                      Read Online <ExternalLink size={20} />
-                    </button>
                   </div>
                 </div>
               </motion.div>
@@ -172,7 +169,7 @@ export default function YearbookPage() {
                     src={memory.image} 
                     alt={memory.caption} 
                     fill 
-                    className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100 opacity-60 group-hover:opacity-100" 
+                    className="object-cover transition-all duration-700 scale-110 group-hover:scale-100 opacity-60 group-hover:opacity-100" 
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
                     <p className="text-white font-condensed font-black uppercase tracking-widest text-sm">{memory.caption}</p>
