@@ -184,19 +184,9 @@ export default function CourtStatusPage() {
             animate={{ opacity: 1, y: 0 }} 
             transition={{ duration: 0.8 }}
           >
-            <div className="flex items-center gap-3 mb-6">
-              <span className="font-mono-custom text-accent text-xs tracking-[0.4em] uppercase font-black">
-                REAL-TIME MONITORING
-              </span>
-              <div className="h-px w-12 bg-accent/30" />
-              <span className="font-mono-custom text-white/40 text-[10px] uppercase tracking-[0.2em] font-bold">
-                LIVE AS OF {currentTime}
-              </span>
-            </div>
-            
             <h1 className="font-serif-display text-[clamp(56px,10vw,140px)] text-[#F5F0E8] uppercase leading-[0.85] tracking-[-0.03em] mb-12">
               COURT<br />
-              <span className="text-accent normal-case tracking-normal">Status.</span>
+              <span className="normal-case tracking-normal text-accent">Status.</span>
             </h1>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-16">

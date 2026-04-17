@@ -59,7 +59,7 @@ export default function YearbookPage() {
                 transition={{ delay: 0.1 }}
                 className="font-serif-display text-[clamp(60px,10vw,120px)] leading-[0.9] uppercase tracking-tighter"
               >
-                Sports <br /> <span className="normal-case tracking-normal">Yearbook.</span>
+                Sports <br /> <span className="normal-case tracking-normal text-accent">Yearbook.</span>
               </motion.h1>
             </div>
             <motion.div

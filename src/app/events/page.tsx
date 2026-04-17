@@ -113,7 +113,7 @@ export default function EventsPage() {
           <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1 }}>
             <h1 className="font-serif-display text-[clamp(64px,12vw,160px)] text-[#F5F0E8] uppercase leading-[0.9] tracking-[-0.03em] mb-12">
               EVENTS<br />
-              <span className="normal-case tracking-normal">Timeline</span>
+              <span className="normal-case tracking-normal text-accent">Timeline</span>
             </h1>
 
             <div className="flex flex-wrap gap-12 md:gap-24 items-end">

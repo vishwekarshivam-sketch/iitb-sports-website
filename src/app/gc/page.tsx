@@ -50,7 +50,7 @@ export default function GCPage() {
           >
             <h1 className="font-serif-display text-[clamp(64px,12vw,160px)] text-[#F5F0E8] uppercase leading-[0.9] tracking-[-0.03em] mb-12">
               GENERAL<br />
-              <span className="normal-case tracking-normal">Championship</span>
+              <span className="normal-case tracking-normal text-accent">Championship</span>
             </h1>
 
             <div className="flex flex-wrap gap-12 md:gap-24 items-end">

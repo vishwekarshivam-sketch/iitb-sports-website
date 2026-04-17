@@ -35,10 +35,9 @@ export default function SportsDirectoryPage() {
               transition={{ duration: 1 }}
               className="lg:col-span-8"
             >
-              <span className="font-mono-custom text-accent text-xs tracking-[0.4em] uppercase font-black mb-8 block underline decoration-accent/20 underline-offset-8">THE DIRECTORY</span>
               <h1 className="font-serif-display text-[clamp(64px,10vw,160px)] uppercase leading-[1.0] tracking-[-0.03em] text-[#F5F0E8]">
                 EVERY<br />
-                <span className="text-accent normal-case">Sport.</span><br />
+                <span className="normal-case text-accent">Sport.</span><br />
                 ONE CAMPUS.
               </h1>
             </motion.div>

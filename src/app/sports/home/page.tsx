@@ -131,7 +131,7 @@ export default function HomePage() {
               className="font-serif-display text-[clamp(90px,16vw,220px)] leading-[0.82] tracking-[0.02em] uppercase mb-12"
             >
               UNTIL.<br />
-              <span className="text-[#F5F0E8]">VICTORY.</span><br />
+              <span className="text-accent">VICTORY.</span><br />
               <span className="relative">
                 ALWAYS.
                 <motion.span 

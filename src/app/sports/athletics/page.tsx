@@ -112,23 +112,13 @@ export default function AthleticsPage() {
         </div>
 
         <div className="relative z-10 mx-auto flex min-h-[92vh] max-w-[1400px] flex-col justify-end px-6 pb-20 pt-36 md:px-12 lg:px-24 lg:pt-44">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="mb-6 flex items-center gap-3 font-mono-custom text-[11px] font-black uppercase tracking-[0.35em] text-accent"
-          >
-            <span className="h-px w-10 bg-accent" />
-            IIT Bombay Sports · Gymkhana
-          </motion.div>
-
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.15 }}
             className="font-serif-display text-[clamp(84px,16vw,220px)] font-black uppercase leading-[0.84] tracking-[-0.05em] text-[#F5F0E8]"
           >
-            Athle<span className="text-accent">tics</span>
+            <span className="text-[#F5F0E8]">Athle</span><span className="text-accent">tics</span>
           </motion.h1>
 
           <motion.div
