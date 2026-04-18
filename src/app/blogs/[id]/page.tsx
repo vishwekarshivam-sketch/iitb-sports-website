@@ -82,7 +82,7 @@ export default function ArticlePage() {
             alt={post.title}
             fill
             priority
-            className="object-cover opacity-70 scale-105"
+            className="object-cover object-top opacity-70"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-transparent to-transparent" />
         </motion.div>

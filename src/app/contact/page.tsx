@@ -2,6 +2,7 @@
 
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import CursorGlow from '@/components/CursorGlow';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin } from 'lucide-react';
 
@@ -34,10 +35,7 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-cream text-[#111111] selection:bg-accent selection:text-white">
       <Navbar />
-
-      {/* Grain Overlay */}
-      <div className="fixed inset-0 pointer-events-none z-[100] opacity-[0.03]" 
-           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E")` }} />
+      <CursorGlow />
 
       <main className="pt-32 pb-24 px-6 md:px-12 lg:px-24">
         <div className="max-w-[1400px] mx-auto">
@@ -149,6 +147,28 @@ export default function ContactPage() {
             </motion.div>
           </div>
         </div>
+
+        {/* Map Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="max-w-[1400px] mx-auto mt-24"
+        >
+          <h3 className="font-condensed text-3xl font-black uppercase tracking-tight mb-8">IITB New Gymkhana</h3>
+          <div className="rounded-[32px] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.12)] w-full h-[480px]">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.40196496999!2d72.90936837570915!3d19.133874250152097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b80820306e3f%3A0xa4024d1ba55c8ed1!2sIITB%20New%20Gymkhana!5e0!3m2!1sen!2sin!4v1776470677052!5m2!1sen!2sin"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
+        </motion.div>
       </main>
 
       <Footer />

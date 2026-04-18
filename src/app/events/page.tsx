@@ -2,7 +2,8 @@
 
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import Image from 'next/image';
 import { useMemo, useState } from 'react';
 
 type EventItem = {
@@ -68,6 +69,9 @@ const SPORT_CATEGORIES = [
 ];
 
 export default function EventsPage() {
+  const { scrollY } = useScroll();
+  const bgY = useTransform(scrollY, [0, 800], [0, 240]);
+
   const [filter, setFilter] = useState<string>('All');
   const [query, setQuery] = useState<string>('');
 
@@ -96,39 +100,128 @@ export default function EventsPage() {
       <Navbar />
 
       {/* Hero */}
-      <section className="bg-[#111111] pt-48 pb-24 px-6 md:px-12 lg:px-24 overflow-hidden relative">
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            opacity: 0.05,
-            backgroundImage: 'radial-gradient(circle at 2px 2px, #C4622D 1px, transparent 0)',
-            backgroundSize: '40px 40px',
-          }}
+      <section className="pt-36 pb-0 overflow-hidden relative min-h-[110vh] flex flex-col">
+        {/* Background Typography with Parallax */}
+        <motion.div 
+          style={{ y: bgY }}
+          className="absolute inset-0 flex items-center justify-center select-none pointer-events-none z-0"
+        >
+          <span className="font-condensed font-black text-[30vw] text-white/[0.04] leading-none uppercase tracking-tighter">
+            EVENTS
+          </span>
+        </motion.div>
+
+        {/* Full-bleed background image */}
+        <Image
+          src="/gymkhana.webp"
+          alt="IITB Gymkhana grounds"
+          fill
+          className="object-cover object-center"
+          priority
         />
-        <div className="absolute top-0 right-0 font-condensed font-black text-[360px] text-accent/10 leading-none pointer-events-none select-none translate-x-1/4 -translate-y-1/4">
-          24
+        {/* Multi-layer overlay: deep dark bottom, subtle top, warm tint */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#0d0d0d]/85 to-[#0d0d0d]/60" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0d0d0d]/80 via-transparent to-[#0d0d0d]/40" />
+
+
+        {/* Calendar week grid — full width background */}
+        <div className="absolute bottom-0 left-0 right-0 flex items-end justify-between px-6 md:px-12 lg:px-24 pointer-events-none select-none overflow-hidden" style={{ height: '65%' }}>
+          {EVENTS.map((d) => (
+            <div key={d.date} className="flex flex-col items-center flex-1" style={{ opacity: d.isToday ? 1 : 0.07 }}>
+              <span
+                className="font-condensed font-black leading-none tracking-tighter"
+                style={{
+                  fontSize: 'clamp(60px, 10vw, 160px)',
+                  color: d.isToday ? '#C4622D' : '#F5F0E8',
+                }}
+              >
+                {d.date}
+              </span>
+              <span className="font-mono-custom uppercase tracking-[0.3em] font-black mt-2"
+                style={{
+                  fontSize: d.isToday ? '13px' : '9px',
+                  color: d.isToday ? '#C4622D' : '#F5F0E8',
+                  marginBottom: '12px',
+                }}>
+                {d.dayShort}
+              </span>
+            </div>
+          ))}
         </div>
 
-        <div className="max-w-[1400px] mx-auto relative z-10">
-          <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1 }}>
-            <h1 className="font-serif-display text-[clamp(64px,12vw,160px)] text-[#F5F0E8] uppercase leading-[0.9] tracking-[-0.03em] mb-12">
-              EVENTS<br />
-              <span className="normal-case tracking-normal text-accent">Timeline</span>
-            </h1>
+        {/* Vertical divider */}
+        <div className="absolute top-0 bottom-0 left-1/2 w-px bg-white/[0.04] pointer-events-none hidden lg:block" />
 
-            <div className="flex flex-wrap gap-12 md:gap-24 items-end">
-              <div className="flex flex-col">
-                <span className="font-condensed font-black text-6xl text-accent">{totalEvents}</span>
-                <span className="font-mono-custom text-[10px] uppercase tracking-[0.2em] text-white/40 font-bold mt-2">SCHEDULED EVENTS</span>
+        {/* Content grid */}
+        <div className="max-w-[1400px] mx-auto w-full px-6 md:px-12 lg:px-24 relative z-10 flex-1 grid lg:grid-cols-2 gap-0">
+
+          {/* Left — headline + stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9 }}
+            className="flex flex-col justify-center pb-24 lg:pr-16 border-r border-white/[0.04]"
+          >
+            <span className="font-mono-custom text-[10px] uppercase tracking-[0.4em] text-accent font-black mb-8 flex items-center gap-3">
+              <span className="w-6 h-px bg-accent" /> WK 16 · APR 12–18 · 2025
+            </span>
+            <h1 className="font-serif-display text-[clamp(80px,12vw,180px)] text-[#F5F0E8] uppercase leading-[0.85] tracking-[-0.04em] mb-14">
+              EVENTS<br />
+              <span className="text-accent normal-case tracking-normal">Timeline.</span>
+            </h1>
+            <div className="flex gap-10 items-end border-t border-white/[0.06] pt-8">
+              <div>
+                <span className="font-condensed font-black text-5xl text-accent block">{totalEvents}</span>
+                <span className="font-mono-custom text-[9px] uppercase tracking-[0.25em] text-white/30 font-bold mt-1 block">Scheduled</span>
               </div>
-              <div className="flex flex-col">
-                <span className="font-condensed font-black text-6xl text-accent">14</span>
-                <span className="font-mono-custom text-[10px] uppercase tracking-[0.2em] text-white/40 font-bold mt-2">SPORT CATEGORIES</span>
+              <div className="w-px h-10 bg-white/10" />
+              <div>
+                <span className="font-condensed font-black text-5xl text-accent block">14</span>
+                <span className="font-mono-custom text-[9px] uppercase tracking-[0.25em] text-white/30 font-bold mt-1 block">Sports</span>
               </div>
-              <div className="flex flex-col">
-                <span className="font-condensed font-black text-5xl text-[#F5F0E8]/50 mb-1">WK 16</span>
-                <span className="font-mono-custom text-[10px] uppercase tracking-[0.2em] text-white/40 font-bold">APR 12 – APR 18</span>
+              <div className="w-px h-10 bg-white/10" />
+              <div>
+                <span className="font-condensed font-black text-5xl text-[#F5F0E8]/40 block">7</span>
+                <span className="font-mono-custom text-[9px] uppercase tracking-[0.25em] text-white/30 font-bold mt-1 block">Days</span>
               </div>
+            </div>
+          </motion.div>
+
+          {/* Right — today's live event ticker */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.9, delay: 0.2 }}
+            className="flex flex-col justify-center pb-24 lg:pl-16 hidden lg:flex"
+          >
+            <div className="flex items-center gap-3 mb-8">
+              <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+              <span className="font-mono-custom text-[10px] uppercase tracking-[0.4em] text-white/40 font-black">
+                Today · {today?.day} {today?.date} {today?.month}
+              </span>
+            </div>
+            <div className="space-y-0 divide-y divide-white/[0.06]">
+              {(today?.events ?? []).map((e, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: 16 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.4 + i * 0.1 }}
+                  className="py-5 flex items-center justify-between group"
+                >
+                  <div className="flex items-center gap-4">
+                    <span className="w-1 h-8 rounded-full shrink-0" style={{ backgroundColor: e.color }} />
+                    <div>
+                      <p className="font-condensed font-black text-xl text-[#F5F0E8] uppercase leading-tight">{e.name}</p>
+                      <p className="font-mono-custom text-[9px] uppercase tracking-[0.25em] text-white/30 mt-0.5">{e.venue}</p>
+                    </div>
+                  </div>
+                  <span className="font-condensed font-black text-2xl text-white/20 group-hover:text-accent transition-colors">{e.time}</span>
+                </motion.div>
+              ))}
+              {(today?.events ?? []).length === 0 && (
+                <p className="font-mono-custom text-[11px] uppercase tracking-widest text-white/20 py-8">No events today</p>
+              )}
             </div>
           </motion.div>
         </div>

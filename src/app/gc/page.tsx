@@ -1,11 +1,16 @@
 'use client';
 
+import CursorGlow from '@/components/CursorGlow';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import Image from 'next/image';
 import { useState } from 'react';
 
 export default function GCPage() {
+  const { scrollY } = useScroll();
+  const bgY = useTransform(scrollY, [0, 800], [0, 240]);
+
   const [activeGender, setActiveGender] = useState<'BOYS' | 'GIRLS'>('BOYS');
   const [activeSport, setActiveSport] = useState('Basketball');
 
@@ -27,30 +32,72 @@ export default function GCPage() {
   return (
     <div className="min-h-screen bg-cream-topo text-[#111111] selection:bg-accent selection:text-black">
       <Navbar />
+      <CursorGlow />
 
       {/* Hero Section */}
-      <section className="relative bg-[#111111] pt-48 pb-24 px-6 md:px-12 lg:px-24 overflow-hidden">
-        {/* Decorative background grid */}
-        <div className="absolute inset-0 opacity-[0.05] pointer-events-none" 
-             style={{ 
-               backgroundImage: `radial-gradient(circle at 2px 2px, #C4622D 1px, transparent 0)`, 
-               backgroundSize: '40px 40px' 
-             }} />
-             
-        {/* Giant GC Text */}
-        <div className="absolute top-0 right-0 font-condensed font-black text-[360px] text-accent/5 leading-none pointer-events-none select-none translate-x-1/4 -translate-y-1/4">
-          GC
+      <section className="relative h-screen bg-[#111111] pt-48 pb-24 px-6 md:px-12 lg:px-24 overflow-hidden flex items-center">
+        {/* Hostel Image Grid Background */}
+        <div className="absolute inset-0 z-0 grid grid-cols-12 grid-rows-6 gap-2 opacity-45">
+          <div className="col-span-4 row-span-6 relative">
+            <Image 
+              src="/hostel pics/174592244_573505810708871_1645670021528088598_n.jpg" 
+              alt="Hostel life" fill className="object-cover saturate-[0.2] hover:saturate-100 transition-all duration-1000"
+            />
+          </div>
+          <div className="col-span-5 row-span-3 relative">
+            <Image 
+              src="/hostel pics/36_big.jpg" 
+              alt="IITB Hostel" fill className="object-cover saturate-[0.2] hover:saturate-100 transition-all duration-1000"
+            />
+          </div>
+          <div className="col-span-3 row-span-4 relative">
+            <Image 
+              src="/hostel pics/94319743_711701622900243_6699078729796310141_n.jpg" 
+              alt="Hostel building" fill className="object-cover saturate-[0.2] hover:saturate-100 transition-all duration-1000"
+            />
+          </div>
+          <div className="col-span-5 row-span-3 relative">
+            <Image 
+              src="/hostel pics/IIT5.JPEGWNP4.jpg" 
+              alt="Hostel campus" fill className="object-cover saturate-[0.2] hover:saturate-100 transition-all duration-1000"
+            />
+          </div>
+          <div className="col-span-3 row-span-2 relative">
+             <div className="absolute inset-0 bg-accent/20 mix-blend-overlay" />
+             <Image 
+              src="/hostel pics/36_big.jpg" 
+              alt="Hostel detail" fill className="object-cover saturate-0 opacity-50"
+            />
+          </div>
         </div>
 
-        <div className="relative z-10 max-w-[1400px] mx-auto">
+        {/* Dark Overlays for legibility */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#111111] via-[#111111]/80 to-transparent z-1" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-[#111111]/60 z-1" />
+             
+        {/* Giant GC Text with Parallax */}
+        <motion.div 
+          style={{ y: bgY }}
+          className="absolute top-0 right-0 font-condensed font-black text-[360px] text-accent/5 leading-none pointer-events-none select-none translate-x-1/4 -translate-y-1/4 z-1"
+        >
+          GC
+        </motion.div>
+
+        <div className="relative z-10 max-w-[1400px] mx-auto w-full">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
           >
-            <h1 className="font-serif-display text-[clamp(64px,12vw,160px)] text-[#F5F0E8] uppercase leading-[0.9] tracking-[-0.03em] mb-12">
-              GENERAL<br />
-              <span className="normal-case tracking-normal text-accent">Championship</span>
+            <h1 className="font-serif-display leading-[0.9] mb-12">
+              <span className="block text-[clamp(64px,9vw,140px)] uppercase"
+                style={{ letterSpacing:'0.15em', fontWeight:700, WebkitTextStroke:'2px #F5F0E8', WebkitTextFillColor:'transparent', color:'transparent' }}>
+                GENERAL
+              </span>
+              <span className="block text-[clamp(90px,14vw,210px)] normal-case text-accent"
+                style={{ letterSpacing:'-0.02em' }}>
+                Championship
+              </span>
             </h1>
 
             <div className="flex flex-wrap gap-12 md:gap-24 items-end">

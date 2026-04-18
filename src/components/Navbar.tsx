@@ -21,30 +21,38 @@ const COURT_BOOKING_URL = 'https://court-booking-assignment.vercel.app/login';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isNavVisible, setIsNavVisible] = useState(true);
+  const [isNavVisible, setIsNavVisible] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const lastScrollYRef = useRef(0);
   const pathname = usePathname();
 
   useEffect(() => {
+    const HERO_THRESHOLD = window.innerHeight * 0.8;
+
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
       setIsScrolled(currentScrollY > 80);
 
-      if (currentScrollY <= 24) {
-        setIsNavVisible(true);
-      } else if (currentScrollY > lastScrollYRef.current) {
+      if (currentScrollY <= 10) {
+        // at very top — hide
         setIsNavVisible(false);
       } else if (currentScrollY < lastScrollYRef.current) {
+        // scrolling up anywhere — show
         setIsNavVisible(true);
+      } else if (currentScrollY < HERO_THRESHOLD) {
+        // scrolling down inside hero — hide
+        setIsNavVisible(false);
+      } else {
+        // scrolling down past hero — hide
+        setIsNavVisible(false);
       }
 
       lastScrollYRef.current = currentScrollY;
     };
 
     handleScroll();
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 

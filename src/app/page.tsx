@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { InstagramIcon, LinkedinIcon, FacebookIcon } from '@/components/SocialIcons';
 import Link from 'next/link';
+import CursorGlow from '@/components/CursorGlow';
+import { useRouter } from 'next/navigation';
 
 const CYCLING_WORDS = [
   'CRICKET',
@@ -22,176 +24,160 @@ export default function LandingPage() {
   const [wordIndex, setWordIndex] = useState(0);
   const [hasStartedCycling, setHasStartedCycling] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
+  const router = useRouter();
+
+  // Navigate to sports/home when user scrolls down past hero
+  useEffect(() => {
+    let triggered = false;
+    const handleWheel = (e: WheelEvent) => {
+      if (e.deltaY > 40 && !triggered) {
+        triggered = true;
+        router.push('/sports/home');
+      }
+    };
+    const handleTouch = (() => {
+      let startY = 0;
+      return {
+        start: (e: TouchEvent) => { startY = e.touches[0].clientY; },
+        end: (e: TouchEvent) => {
+          if (startY - e.changedTouches[0].clientY > 50 && !triggered) {
+            triggered = true;
+            router.push('/sports/home');
+          }
+        },
+      };
+    })();
+    window.addEventListener('wheel', handleWheel, { passive: true });
+    window.addEventListener('touchstart', handleTouch.start, { passive: true });
+    window.addEventListener('touchend', handleTouch.end, { passive: true });
+    return () => {
+      window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('touchstart', handleTouch.start);
+      window.removeEventListener('touchend', handleTouch.end);
+    };
+  }, [router]);
 
   useEffect(() => {
-    const startTimer = setTimeout(() => {
-      setHasStartedCycling(true);
-    }, 1200);
-
+    const startTimer = setTimeout(() => setHasStartedCycling(true), 1200);
     return () => clearTimeout(startTimer);
   }, []);
 
   useEffect(() => {
     if (!hasStartedCycling || isFinished) return;
-
     const interval = setInterval(() => {
       setWordIndex((prev) => {
-        if (prev === CYCLING_WORDS.length - 1) {
-          setIsFinished(true);
-          clearInterval(interval);
-          return prev;
-        }
+        if (prev === CYCLING_WORDS.length - 1) { setIsFinished(true); clearInterval(interval); return prev; }
         return prev + 1;
       });
     }, 540);
-
     return () => clearInterval(interval);
   }, [hasStartedCycling, isFinished]);
 
   return (
     <main className="relative h-screen w-full overflow-hidden bg-black text-white selection:bg-accent selection:text-black">
-      {/* 1. Background Video */}
+      <CursorGlow />
+
+      {/* Video */}
       <div className="absolute inset-0 z-0">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="h-full w-full object-cover"
-        >
+        <video autoPlay muted loop playsInline className="h-full w-full object-cover"
+          style={{ filter: 'saturate(0.7) contrast(1.05)' }}>
           <source src="/hero-bg.mp4" type="video/mp4" />
         </video>
-        {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-black/60" />
+        {/* Cinematic letterbox gradient — heavy bottom, lighter top */}
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.15) 60%, rgba(0,0,0,0.75) 100%)' }} />
+        {/* Vignette edges */}
+        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 90% 90% at 50% 50%, transparent 35%, rgba(0,0,0,0.7) 100%)' }} />
+        {/* Grain */}
+        <div className="absolute inset-0 pointer-events-none opacity-[0.04]"
+          style={{ backgroundImage:`url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize:'160px 160px' }} />
       </div>
 
-      {/* 2. Top-Left Corner — Logo Mark */}
+      {/* Logo — top left */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.1 }}
-        className="absolute top-5 left-6 md:top-7 md:left-8 z-20 flex items-center gap-4 px-5 py-2.5 bg-black/10 backdrop-blur-md rounded-xl group transition-all hover:bg-black/20"
+        className="absolute top-5 left-6 md:top-7 md:left-8 z-20 flex items-center gap-4 px-5 py-2.5 bg-black/10 backdrop-blur-md rounded-xl"
       >
-        <div className="relative h-11 w-11 md:h-13 md:w-13">
-          <Image
-            src="/assets/iit-bombay-sports-logo-nav.svg"
-            alt="IIT Bombay Sports"
-            fill
-            priority
-            className="object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.3)]"
-          />
+        <div className="relative h-11 w-11">
+          <Image src="/assets/iit-bombay-sports-logo-nav.svg" alt="IIT Bombay Sports" fill priority className="object-contain" />
         </div>
         <div className="flex flex-col leading-none border-l border-white/10 pl-4">
-          <span className="text-[11px] md:text-[13px] font-black tracking-[0.3em] text-white uppercase mb-1">
-            IIT Bombay
-          </span>
+          <span className="text-[11px] md:text-[13px] font-black tracking-[0.3em] text-white uppercase">IIT Bombay</span>
         </div>
       </motion.div>
 
-      {/* 3. Top-Right Corner - Legal Links */}
-      <nav className="absolute top-8 right-8 z-30 flex gap-8 text-[13px] font-medium tracking-[0.2em] pointer-events-auto">
-        <Link href="/terms" className="opacity-60 hover:opacity-100 hover:underline underline-offset-4 decoration-accent transition-all">
-          TERMS
-        </Link>
-        <Link href="/terms" className="opacity-60 hover:opacity-100 hover:underline underline-offset-4 decoration-accent transition-all">
-          PRIVACY POLICY
-        </Link>
+      {/* Legal — top right */}
+      <nav className="absolute top-8 right-8 z-30 flex gap-8 text-[11px] font-medium tracking-[0.25em]">
+        <Link href="/terms" className="opacity-40 hover:opacity-80 transition-opacity">TERMS</Link>
+        <Link href="/terms" className="opacity-40 hover:opacity-80 transition-opacity">PRIVACY</Link>
       </nav>
 
-      {/* Content Container */}
-      <div className="relative z-10 flex h-full flex-col justify-between px-8 py-12 md:px-16 md:py-16">
-        
-        <div className="mt-16 flex flex-col items-start">
-          <div className="flex flex-col leading-[0.96] uppercase text-[15vw] md:text-[11vw] font-hero">
-            <motion.span
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              WELCOME TO
-            </motion.span>
-            <motion.span
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              IIT BOMBAY
-            </motion.span>
-            <div className="relative h-[1.1em] w-screen overflow-hidden">
-              <AnimatePresence initial={false}>
-                {hasStartedCycling ? (
-                  <motion.span
-                    key={CYCLING_WORDS[wordIndex]}
-                    initial={{ opacity: 0, y: '100%' }}
-                    animate={{ opacity: 1, y: '0%' }}
-                    exit={{ opacity: 0, y: '-100%' }}
-                    transition={{
-                      duration: 0.45,
-                      ease: [0.16, 1, 0.3, 1]
-                    }}
-                    className="absolute inset-0 block whitespace-nowrap"
-                  >
-                    {CYCLING_WORDS[wordIndex]}
-                    {isFinished && (
-                      <motion.span 
-                        initial={{ opacity: 0, scale: 0.5 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.2, duration: 0.5 }}
-                        className="text-accent ml-2 inline-block align-top origin-left"
-                      >
-                        *
-                      </motion.span>
-                    )}
-                  </motion.span>
-                ) : null}
-              </AnimatePresence>
-            </div>
-            
-            {/* Tagline Animation */}
-            <div className="h-12 overflow-hidden mt-0 -translate-y-4">
-              <AnimatePresence>
-                {isFinished && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
-                    className="font-serif-italic text-2xl md:text-3xl text-white/70 italic tracking-tight"
-                  >
-                    *Until victory always.
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          </div>
+      {/* Main content — vertically centered */}
+      <div className="relative z-10 flex h-full flex-col justify-center px-8 md:px-16">
 
-          {/* 4. Social Links Row */}
+        {/* WELCOME TO IIT BOMBAY — white/60, slightly smaller */}
+        <div className="overflow-hidden mb-0">
+          <motion.span
+            initial={{ y: '100%' }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="block font-condensed font-black uppercase leading-[0.92]"
+            style={{ fontSize: 'clamp(72px, 13vw, 200px)', letterSpacing: '-0.02em', color: 'rgba(255,255,255,0.55)' }}
+          >
+            WELCOME TO
+          </motion.span>
+        </div>
+        <div className="overflow-hidden mb-2">
+          <motion.span
+            initial={{ y: '100%' }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="block font-condensed font-black uppercase leading-[0.92]"
+            style={{ fontSize: 'clamp(72px, 13vw, 200px)', letterSpacing: '-0.02em', color: 'rgba(255,255,255,0.55)' }}
+          >
+            IIT BOMBAY
+          </motion.span>
+        </div>
+
+        {/* Cycling sport word — solid white, slightly larger */}
+        <div className="relative overflow-hidden" style={{ height: 'clamp(80px, 14.5vw, 220px)' }}>
+          <AnimatePresence initial={false}>
+            {hasStartedCycling && (
+              <motion.span
+                key={CYCLING_WORDS[wordIndex]}
+                initial={{ clipPath: 'inset(0 0 100% 0)' }}
+                animate={{ clipPath: 'inset(0 0 0% 0)' }}
+                exit={{ clipPath: 'inset(100% 0 0% 0)' }}
+                transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute inset-0 block whitespace-nowrap font-condensed font-black uppercase text-white"
+                style={{ fontSize: 'clamp(80px, 14.5vw, 220px)', lineHeight: 0.92, letterSpacing: '-0.02em' }}
+              >
+                {CYCLING_WORDS[wordIndex]}{isFinished && <span className="text-accent">*</span>}
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* Tagline + socials — always in DOM, opacity transition only — NO layout shift */}
+        <div className="mt-0.5 flex flex-col gap-4">
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: isFinished ? 1 : 0 }}
+            transition={{ duration: 0.9 }}
+            className="-translate-y-4 md:-translate-y-5 font-serif-italic text-3xl md:text-4xl text-white/60 italic leading-snug"
+          >
+            *Until victory always.
+          </motion.p>
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.2, duration: 1 }}
-            className="mt-5 flex items-center gap-5 pl-1"
+            transition={{ delay: 0.2, duration: 1 }}
+            className="flex items-center gap-6"
           >
-            <Link 
-              href="https://www.instagram.com/iitbombaysports" 
-              target="_blank"
-              className="opacity-65 hover:opacity-100 hover:text-accent transition-all"
-            >
-              <InstagramIcon size={28} />
-            </Link>
-            <Link 
-              href="https://www.linkedin.com/company/iit-bombay-sports/?originalSubdomain=in" 
-              target="_blank"
-              className="opacity-65 hover:opacity-100 hover:text-accent transition-all"
-            >
-              <LinkedinIcon size={28} />
-            </Link>
-            <Link 
-              href="https://www.facebook.com/iitbombaysports/" 
-              target="_blank"
-              className="opacity-65 hover:opacity-100 hover:text-accent transition-all"
-            >
-              <FacebookIcon size={28} />
-            </Link>
+            <Link href="https://www.instagram.com/iitbombaysports" target="_blank" className="opacity-50 hover:opacity-100 hover:text-accent transition-all"><InstagramIcon size={32} /></Link>
+            <Link href="https://www.linkedin.com/company/iit-bombay-sports/?originalSubdomain=in" target="_blank" className="opacity-50 hover:opacity-100 hover:text-accent transition-all"><LinkedinIcon size={32} /></Link>
+            <Link href="https://www.facebook.com/iitbombaysports/" target="_blank" className="opacity-50 hover:opacity-100 hover:text-accent transition-all"><FacebookIcon size={32} /></Link>
           </motion.div>
         </div>
 

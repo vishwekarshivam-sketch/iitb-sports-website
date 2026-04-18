@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 
 import Footer from '@/components/Footer';
@@ -64,26 +65,61 @@ export default function BlogsPage() {
     <div className="min-h-screen bg-cream-topo text-[#111111] selection:bg-accent selection:text-black font-iitb-text">
       <Navbar />
       
-      {/* Grain Overlay */}
-      <div className="fixed inset-0 pointer-events-none z-[100] opacity-[0.03]" 
-           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E")` }} />
+      {/* Spanning magazine image — bleeds from hero into content */}
+      <div className="relative">
+      <img src="/news magazine/6997fcceb0ba7.preview.jpg" alt=""
+        className="hidden xl:block"
+        style={{ position:'absolute', top:0, right:'-20px', width:'340px', height:'130%', objectFit:'cover', objectPosition:'center top', transform:'rotate(1.5deg)', filter:'sepia(40%) contrast(1.2) brightness(0.55)', opacity:0.38, mixBlendMode:'luminosity', zIndex:20, pointerEvents:'none', userSelect:'none', boxShadow:'0 40px 100px rgba(0,0,0,0.7)', border:'1px solid rgba(255,255,255,0.05)', clipPath:'polygon(0 0, 100% 0, 100% 92%, 90% 100%, 0 100%)', WebkitMaskImage:'linear-gradient(to bottom, black 60%, transparent 100%)', maskImage:'linear-gradient(to bottom, black 60%, transparent 100%)' }} />
 
       {/* Hero Section */}
-      <section className="relative bg-[#111111] pt-48 pb-32 px-6 md:px-12 lg:px-24 overflow-hidden">
-        {/* Decorative elements */}
-        <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
-             style={{ 
-               backgroundImage: `linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)`, 
-               backgroundSize: '80px 80px' 
-             }} />
-        
-        <div className="max-w-[1400px] mx-auto relative z-10">
+      <section className="relative bg-[#0d0b09] pt-48 pb-0 px-6 md:px-12 lg:px-24 overflow-hidden min-h-[85vh] flex flex-col">
+
+        {/* ── BACKGROUND SCATTER (6 images, ultra-low opacity) ── */}
+        <div className="absolute inset-0 pointer-events-none select-none z-0">
+          {/* Large anchor — top right */}
+          <img src="/news magazine/_131914198_monday_star.jpg" alt=""
+            style={{ position:'absolute', top:'-40px', right:'-60px', width:'420px', height:'580px', objectFit:'cover', objectPosition:'center top', transform:'rotate(4deg)', filter:'sepia(40%) contrast(1.15) brightness(0.75)', opacity:0.13, mixBlendMode:'luminosity', WebkitMaskImage:'radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%)', maskImage:'radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%)' }} />
+          {/* Medium — bottom left */}
+          <img src="/news magazine/Sports_Pluse_English__17_January_2025-2.jpg" alt=""
+            style={{ position:'absolute', bottom:'-60px', left:'-40px', width:'320px', height:'420px', objectFit:'cover', transform:'rotate(-6deg)', filter:'sepia(40%) contrast(1.15) brightness(0.75)', opacity:0.11, mixBlendMode:'luminosity', WebkitMaskImage:'radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%)', maskImage:'radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%)' }} />
+          {/* Small — center right mid */}
+          <img src="/news magazine/sport-now--newspaper-cover-template.jpg" alt=""
+            style={{ position:'absolute', top:'35%', right:'180px', width:'200px', height:'280px', objectFit:'cover', transform:'rotate(2deg)', filter:'sepia(40%) contrast(1.15) brightness(0.75)', opacity:0.10, mixBlendMode:'luminosity', WebkitMaskImage:'radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%)', maskImage:'radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%)' }} />
+          {/* Top left corner */}
+          <img src="/news magazine/_132529311_times.jpg.png" alt=""
+            style={{ position:'absolute', top:'60px', left:'20px', width:'260px', height:'340px', objectFit:'cover', transform:'rotate(-3deg)', filter:'sepia(40%) contrast(1.15) brightness(0.75)', opacity:0.09, mixBlendMode:'luminosity', WebkitMaskImage:'radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%)', maskImage:'radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%)' }} />
+          {/* Bottom center */}
+          <img src="/news magazine/61fad50ce96a0.jpg" alt=""
+            style={{ position:'absolute', bottom:'-20px', left:'40%', width:'240px', height:'320px', objectFit:'cover', transform:'rotate(5deg)', filter:'sepia(40%) contrast(1.15) brightness(0.75)', opacity:0.09, mixBlendMode:'luminosity', WebkitMaskImage:'radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%)', maskImage:'radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%)' }} />
+          {/* Mid-left */}
+          <img src="/news magazine/imageprocessor.jpg" alt=""
+            style={{ position:'absolute', top:'25%', left:'60px', width:'180px', height:'240px', objectFit:'cover', transform:'rotate(-5deg)', filter:'sepia(40%) contrast(1.15) brightness(0.75)', opacity:0.08, mixBlendMode:'luminosity', WebkitMaskImage:'radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%)', maskImage:'radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%)' }} />
+        </div>
+
+        {/* ── CENTRE CIRCULAR BG IMAGE ── */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-[1]">
+          <img src="/news magazine/_133272150_express_sun.jpg" alt=""
+            style={{ width:'1100px', height:'960px', objectFit:'cover', objectPosition:'center', filter:'sepia(40%) contrast(1.15) brightness(0.7)', opacity:0.22, mixBlendMode:'luminosity', WebkitMaskImage:'radial-gradient(ellipse 75% 75% at 50% 50%, black 15%, transparent 70%)', maskImage:'radial-gradient(ellipse 75% 75% at 50% 50%, black 15%, transparent 70%)' }} />
+        </div>
+
+        {/* ── FOREGROUND FEATURE IMAGE — right side ── */}
+        <div className="absolute top-24 right-12 hidden xl:block pointer-events-none select-none z-[2]">
+          <img src="/news magazine/Ebrd0n4WoAAENHe.jpg" alt=""
+            style={{ width:'280px', height:'380px', objectFit:'cover', transform:'rotate(1.5deg)', filter:'sepia(40%) contrast(1.2) brightness(0.6)', opacity:0.55, mixBlendMode:'luminosity', border:'1px solid rgba(255,255,255,0.06)', boxShadow:'0 24px 80px rgba(0,0,0,0.6), 0 4px 16px rgba(0,0,0,0.4)', clipPath:'polygon(0 0, 100% 0, 100% 88%, 88% 100%, 0 100%)' }} />
+        </div>
+
+        {/* ── GRAIN ── */}
+        <div className="absolute inset-0 pointer-events-none z-[3]"
+          style={{ backgroundImage:`url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`, opacity:0.035, mixBlendMode:'overlay', backgroundSize:'160px 160px' }} />
+
+        {/* ── TEXT CONTENT ── */}
+        <div className="max-w-[1400px] mx-auto relative z-10 flex-1 flex flex-col justify-center pb-16">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
           >
-            <h1 className="font-serif-display text-[clamp(64px,12vw,160px)] leading-[0.85] uppercase tracking-[-0.04em] text-[#F5F0E8] mb-12">
+            <h1 className="font-serif-display text-[clamp(80px,12vw,180px)] leading-[0.85] uppercase tracking-[-0.04em] text-[#F5F0E8] mb-12">
               SPORTS<br />
               <span className="text-accent normal-case tracking-normal">Gazette.</span>
             </h1>
@@ -92,17 +128,44 @@ export default function BlogsPage() {
             </p>
           </motion.div>
         </div>
-        
-        <div className="absolute bottom-0 right-0 p-12 hidden lg:block">
-           <div className="font-condensed font-black text-[120px] text-white/[0.02] leading-none uppercase tracking-tighter">
-             Volume 24
-           </div>
+
+        {/* ── MARQUEE STRIP ── */}
+        <div className="relative z-10 w-full border-t border-white/10 overflow-hidden">
+          <style>{`
+            @keyframes marquee-blogs {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+            .marquee-blogs { animation: marquee-blogs 28s linear infinite; }
+          `}</style>
+          <div className="marquee-blogs flex whitespace-nowrap py-4">
+            {[...Array(2)].map((_, i) => (
+              <div key={i} className="flex items-center gap-0 shrink-0">
+                {['BADMINTON', 'FOOTBALL', 'ATHLETICS', 'SWIMMING', 'CRICKET', 'VOLLEYBALL', 'BASKETBALL', 'TENNIS', 'HOCKEY', 'SQUASH', 'TABLE TENNIS', 'WRESTLING'].map((sport) => (
+                  <span key={sport} className="flex items-center gap-6 px-8">
+                    <span className="font-mono-custom text-[10px] font-black uppercase tracking-[0.3em] text-white/40">{sport}</span>
+                    <span className="w-1 h-1 rounded-full bg-accent/60 shrink-0" />
+                  </span>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Main Content */}
-      <section className="py-24 px-6 md:px-12 lg:px-24 max-w-[1400px] mx-auto">
-        
+      <section className="py-24 px-6 md:px-12 lg:px-24 max-w-[1400px] mx-auto relative">
+
+        {/* Scattered magazine accents — peek from behind cards */}
+        <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
+          <img src="/news magazine/6997fcceb0ba7.preview.jpg" alt=""
+            style={{ position:'absolute', top:'-20px', right:'-80px', width:'260px', height:'340px', objectFit:'cover', transform:'rotate(5deg)', filter:'sepia(40%) contrast(1.1) brightness(0.7)', opacity:0.18, mixBlendMode:'multiply', WebkitMaskImage:'radial-gradient(ellipse 75% 75% at 50% 50%, black 20%, transparent 100%)', maskImage:'radial-gradient(ellipse 75% 75% at 50% 50%, black 20%, transparent 100%)' }} />
+          <img src="/news magazine/5c56273d8332f04a12e71e3ea5588b5d.jpg" alt=""
+            style={{ position:'absolute', top:'40%', left:'-60px', width:'220px', height:'300px', objectFit:'cover', transform:'rotate(-7deg)', filter:'sepia(40%) contrast(1.1) brightness(0.7)', opacity:0.15, mixBlendMode:'multiply', WebkitMaskImage:'radial-gradient(ellipse 75% 75% at 50% 50%, black 20%, transparent 100%)', maskImage:'radial-gradient(ellipse 75% 75% at 50% 50%, black 20%, transparent 100%)' }} />
+          <img src="/news magazine/_133272150_express_sun.jpg" alt=""
+            style={{ position:'absolute', bottom:'60px', right:'-40px', width:'200px', height:'260px', objectFit:'cover', transform:'rotate(-4deg)', filter:'sepia(40%) contrast(1.1) brightness(0.7)', opacity:0.14, mixBlendMode:'multiply', WebkitMaskImage:'radial-gradient(ellipse 75% 75% at 50% 50%, black 20%, transparent 100%)', maskImage:'radial-gradient(ellipse 75% 75% at 50% 50%, black 20%, transparent 100%)' }} />
+        </div>
+
         {/* Bento Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 auto-rows-auto">
           
@@ -285,6 +348,46 @@ export default function BlogsPage() {
             </div>
           </motion.div>
 
+        </div>
+      </section>
+
+      </div>{/* end spanning wrapper */}
+
+      {/* From the Archives — magazine texture strip */}
+      <section className="relative overflow-hidden bg-[#0d0b09] py-24 px-6 md:px-12 lg:px-24">
+        {/* Background scatter */}
+        <div className="absolute inset-0 pointer-events-none select-none">
+          {[
+            { src: '/news magazine/_131914198_monday_star.jpg', style: { top:0, left:0, width:'100%', height:'100%', objectFit:'cover' as const, filter:'sepia(40%) contrast(1.1) brightness(0.4)', opacity:0.18, mixBlendMode:'luminosity' as const } },
+          ].map((img, i) => (
+            <img key={i} src={img.src} alt="" style={{ position:'absolute', ...img.style }} />
+          ))}
+          {/* Individual scattered mags */}
+          <img src="/news magazine/Sports_Pluse_English__17_January_2025-2.jpg" alt=""
+            style={{ position:'absolute', top:'-30px', left:'5%', width:'180px', height:'240px', objectFit:'cover', transform:'rotate(-3deg)', filter:'sepia(40%) contrast(1.2) brightness(0.55)', opacity:0.45, mixBlendMode:'luminosity', boxShadow:'0 24px 60px rgba(0,0,0,0.7)', border:'1px solid rgba(255,255,255,0.05)', clipPath:'polygon(0 0, 100% 0, 100% 88%, 88% 100%, 0 100%)' }} />
+          <img src="/news magazine/Ebrd0n4WoAAENHe.jpg" alt=""
+            style={{ position:'absolute', top:'-10px', left:'22%', width:'160px', height:'210px', objectFit:'cover', transform:'rotate(2deg)', filter:'sepia(40%) contrast(1.2) brightness(0.55)', opacity:0.5, mixBlendMode:'luminosity', boxShadow:'0 24px 60px rgba(0,0,0,0.7)', border:'1px solid rgba(255,255,255,0.05)' }} />
+          <img src="/news magazine/sport-now--newspaper-cover-template.jpg" alt=""
+            style={{ position:'absolute', top:'-20px', left:'38%', width:'170px', height:'225px', objectFit:'cover', transform:'rotate(-1deg)', filter:'sepia(40%) contrast(1.2) brightness(0.55)', opacity:0.45, mixBlendMode:'luminosity', boxShadow:'0 24px 60px rgba(0,0,0,0.7)', border:'1px solid rgba(255,255,255,0.05)', clipPath:'polygon(0 0, 100% 0, 100% 88%, 88% 100%, 0 100%)' }} />
+          <img src="/news magazine/imageprocessor.jpg" alt=""
+            style={{ position:'absolute', top:'-10px', left:'55%', width:'155px', height:'205px', objectFit:'cover', transform:'rotate(3.5deg)', filter:'sepia(40%) contrast(1.2) brightness(0.55)', opacity:0.4, mixBlendMode:'luminosity', boxShadow:'0 24px 60px rgba(0,0,0,0.7)', border:'1px solid rgba(255,255,255,0.05)' }} />
+          <img src="/news magazine/61fad50ce96a0.jpg" alt=""
+            style={{ position:'absolute', top:'-15px', left:'70%', width:'165px', height:'218px', objectFit:'cover', transform:'rotate(-2.5deg)', filter:'sepia(40%) contrast(1.2) brightness(0.55)', opacity:0.45, mixBlendMode:'luminosity', boxShadow:'0 24px 60px rgba(0,0,0,0.7)', border:'1px solid rgba(255,255,255,0.05)', clipPath:'polygon(0 0, 100% 0, 100% 88%, 88% 100%, 0 100%)' }} />
+          <img src="/news magazine/_132529311_times.jpg.png" alt=""
+            style={{ position:'absolute', top:'-5px', left:'85%', width:'150px', height:'200px', objectFit:'cover', transform:'rotate(1.5deg)', filter:'sepia(40%) contrast(1.2) brightness(0.55)', opacity:0.4, mixBlendMode:'luminosity', boxShadow:'0 24px 60px rgba(0,0,0,0.7)', border:'1px solid rgba(255,255,255,0.05)' }} />
+          {/* Bottom fade */}
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0d0b09] to-transparent" />
+          <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-[#0d0b09] to-transparent" />
+        </div>
+
+        {/* Text */}
+        <div className="relative z-10 max-w-[1400px] mx-auto mt-48 text-center">
+          <h2 className="font-serif-display text-[clamp(40px,6vw,80px)] text-[#F5F0E8]/80 uppercase leading-[0.9] tracking-[-0.03em] mb-8">
+            Every story,<br /><span className="text-accent normal-case">preserved.</span>
+          </h2>
+          <p className="font-mono-custom text-[11px] uppercase tracking-[0.25em] text-white/30 max-w-md mx-auto">
+            A living record of IITB sports — victories, records, and moments that define campus legacy.
+          </p>
         </div>
       </section>
 

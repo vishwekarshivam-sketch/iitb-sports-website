@@ -4,6 +4,12 @@ import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { useEffect, useRef } from 'react';
+
+const SEGMENTS = [
+  { start: 0, end: 44 },
+  { start: 46, end: 59 },
+];
 
 const SPORTS = [
   { id: 'aquatics', name: 'Aquatics', bg: 'bg-[#1a4a6e]', label: 'Main Pool · 50×25m', rotation: -2, year: '3 GOLDS', achievement: 'Inter-IIT Champions' },
@@ -17,17 +23,58 @@ const SPORTS = [
 ];
 
 export default function SportsDirectoryPage() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const segmentRef = useRef(0);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const handleTimeUpdate = () => {
+      const seg = SEGMENTS[segmentRef.current];
+      if (video.currentTime >= seg.end) {
+        segmentRef.current = (segmentRef.current + 1) % SEGMENTS.length;
+        video.currentTime = SEGMENTS[segmentRef.current].start;
+        video.play();
+      }
+    };
+    const handleLoaded = () => { video.currentTime = SEGMENTS[0].start; video.play(); };
+    video.addEventListener('timeupdate', handleTimeUpdate);
+    video.addEventListener('loadedmetadata', handleLoaded);
+    return () => {
+      video.removeEventListener('timeupdate', handleTimeUpdate);
+      video.removeEventListener('loadedmetadata', handleLoaded);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-cream text-[#111111] selection:bg-accent selection:text-black overflow-x-hidden">
       <Navbar />
-      
-      {/* Grain Overlay */}
-      <div className="fixed inset-0 pointer-events-none z-[100] opacity-[0.03]" 
-           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E")` }} />
 
       {/* Page Header */}
-      <header className="bg-[#1C1C1E] pt-48 pb-24 px-6 md:px-12 lg:px-24 overflow-hidden relative">
-        <div className="max-w-[1400px] mx-auto">
+      <header className="pt-48 pb-24 px-6 md:px-12 lg:px-24 overflow-hidden relative min-h-[100vh] flex items-center">
+        {/* Video background */}
+        <div className="absolute inset-0 z-0">
+          <video
+            ref={videoRef}
+            autoPlay
+            muted
+            playsInline
+            className="h-full w-full object-cover"
+            style={{ filter: 'saturate(0.65) contrast(1.1)' }}
+          >
+            <source src="/sports-hero.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0" style={{ background: 'rgba(10,7,4,0.58)' }} />
+          <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 85% 85% at 50% 50%, transparent 30%, rgba(4,3,2,0.88) 100%)' }} />
+          <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+              backgroundRepeat: 'repeat', backgroundSize: '160px 160px',
+            }}
+          />
+        </div>
+
+        <div className="max-w-[1400px] mx-auto w-full relative z-10">
           <div className="grid lg:grid-cols-12 gap-12 items-end">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -35,10 +82,12 @@ export default function SportsDirectoryPage() {
               transition={{ duration: 1 }}
               className="lg:col-span-8"
             >
-              <h1 className="font-serif-display text-[clamp(64px,10vw,160px)] uppercase leading-[1.0] tracking-[-0.03em] text-[#F5F0E8]">
+              <h1 className="font-serif-display text-[clamp(80px,12vw,180px)] uppercase leading-[0.9] tracking-[-0.04em] text-[#F5F0E8]">
                 EVERY<br />
                 <span className="normal-case text-accent">Sport.</span><br />
-                ONE CAMPUS.
+                <span style={{ WebkitTextStroke: '2px #F5F0E8', WebkitTextFillColor: 'transparent', color: 'transparent' }}>
+                  ONE CAMPUS.
+                </span>
               </h1>
             </motion.div>
 
@@ -54,8 +103,8 @@ export default function SportsDirectoryPage() {
             </motion.div>
           </div>
 
-          <div className="mt-24 h-px w-full bg-white/08 flex items-center justify-center">
-            <div className="bg-[#1C1C1E] px-8 py-2 font-mono-custom text-[9px] uppercase tracking-[0.5em] text-white/20 font-black">SCROLL TO EXPLORE</div>
+          <div className="mt-24 h-px w-full bg-white/[0.08] flex items-center justify-center">
+            <div className="px-8 py-2 font-mono-custom text-[9px] uppercase tracking-[0.5em] text-white/20 font-black">SCROLL TO EXPLORE</div>
           </div>
         </div>
       </header>

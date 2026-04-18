@@ -213,7 +213,7 @@ export default function AquaticsPage() {
             transition={{ duration: 1, delay: 0.15 }}
             className="font-serif-display text-[clamp(84px,16vw,220px)] font-black uppercase leading-[0.84] tracking-[-0.05em] text-[#F5F0E8]"
           >
-            <span className="text-[#F5F0E8]">Aqua</span><span className="text-accent">tics</span>
+            Aquatics
           </motion.h1>
 
           <motion.div

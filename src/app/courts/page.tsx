@@ -2,9 +2,9 @@
 
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
-import { MapPin, Clock, CheckCircle2, XCircle, AlertCircle, Search, Filter, ChevronRight, Smartphone } from 'lucide-react';
+import { MapPin, Clock, CheckCircle2, XCircle, AlertCircle, Search, ChevronRight, Smartphone } from 'lucide-react';
 import Image from 'next/image';
 
 type CourtStatus = 'Available' | 'Occupied' | 'Maintenance' | 'Reserved';
@@ -105,7 +105,7 @@ const STATUS_COLORS: Record<CourtStatus, string> = {
   Reserved: '#EF9F27',
 };
 
-const STATUS_ICONS: Record<CourtStatus, any> = {
+const STATUS_ICONS: Record<CourtStatus, React.ElementType> = {
   Available: CheckCircle2,
   Occupied: XCircle,
   Maintenance: AlertCircle,
@@ -113,20 +113,15 @@ const STATUS_ICONS: Record<CourtStatus, any> = {
 };
 
 export default function CourtStatusPage() {
+  const { scrollY } = useScroll();
+  const bgY = useTransform(scrollY, [0, 800], [0, 240]);
+
   const [filter, setFilter] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [currentTime, setCurrentTime] = useState<string>('');
   const [isNavVisible, setIsNavVisible] = useState(true);
   const lastScrollYRef = useRef(0);
 
   useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      setCurrentTime(now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
-    };
-    updateTime();
-    const interval = setInterval(updateTime, 60000);
-
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       if (currentScrollY <= 24) {
@@ -141,7 +136,6 @@ export default function CourtStatusPage() {
 
     window.addEventListener('scroll', handleScroll);
     return () => {
-      clearInterval(interval);
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
@@ -168,7 +162,17 @@ export default function CourtStatusPage() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="bg-[#111111] pt-48 pb-24 px-6 md:px-12 lg:px-24 overflow-hidden relative">
+      <section className="bg-[#111111] pt-48 pb-32 px-6 md:px-12 lg:px-24 overflow-hidden relative min-h-[85vh] flex items-center">
+        {/* Background Typography with Parallax */}
+        <motion.div 
+          style={{ y: bgY }}
+          className="absolute inset-0 flex items-center justify-center select-none pointer-events-none z-0"
+        >
+          <span className="font-condensed font-black text-[30vw] text-white/[0.02] leading-none uppercase tracking-tighter">
+            COURTS
+          </span>
+        </motion.div>
+
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -178,25 +182,26 @@ export default function CourtStatusPage() {
           }}
         />
         
-        <div className="max-w-[1400px] mx-auto relative z-10">
+        <div className="max-w-[1400px] mx-auto relative z-10 grid lg:grid-cols-2 gap-20 items-center">
           <motion.div 
-            initial={{ opacity: 0, y: 20 }} 
-            animate={{ opacity: 1, y: 0 }} 
+            initial={{ opacity: 0, x: -30 }} 
+            animate={{ opacity: 1, x: 0 }} 
             transition={{ duration: 0.8 }}
           >
-            <h1 className="font-serif-display text-[clamp(56px,10vw,140px)] text-[#F5F0E8] uppercase leading-[0.85] tracking-[-0.03em] mb-12">
+            <span className="font-mono-custom text-accent text-xs tracking-[0.4em] uppercase font-black mb-6 block">LIVE FACILITY TRACKER</span>
+            <h1 className="font-serif-display text-[clamp(80px,12vw,180px)] text-[#F5F0E8] uppercase leading-[0.85] tracking-[-0.03em] mb-12">
               COURT<br />
               <span className="normal-case tracking-normal text-accent">Status.</span>
             </h1>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-16">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12">
               <div className="flex flex-col">
                 <span className="font-condensed font-black text-6xl text-accent">{stats.available}</span>
                 <span className="font-mono-custom text-[10px] uppercase tracking-[0.2em] text-white/40 font-bold mt-2">AVAILABLE NOW</span>
               </div>
               <div className="flex flex-col">
                 <span className="font-condensed font-black text-6xl text-[#F5F0E8]">{stats.occupied}</span>
-                <span className="font-mono-custom text-[10px] uppercase tracking-[0.2em] text-white/40 font-bold mt-2">CURRENTLY IN USE</span>
+                <span className="font-mono-custom text-[10px] uppercase tracking-[0.2em] text-white/40 font-bold mt-2">IN USE</span>
               </div>
               <div className="flex flex-col">
                 <span className="font-condensed font-black text-6xl text-white/20">{stats.maintenance}</span>
@@ -204,6 +209,67 @@ export default function CourtStatusPage() {
               </div>
             </div>
           </motion.div>
+
+          {/* Layered Cards Section */}
+          <div className="relative h-[500px] flex items-center justify-center perspective-1000 group">
+            {/* Card 3 (Bottom) */}
+            <motion.div 
+              initial={{ rotate: -4, x: 0 }}
+              whileHover={{ rotate: -12, x: -60, y: -20 }}
+              className="absolute w-[320px] aspect-[3/4] bg-white p-3 pb-12 shadow-2xl rounded-sm z-10 transition-all duration-500 origin-bottom"
+            >
+              <div className="relative w-full h-full overflow-hidden grayscale contrast-125">
+                <Image 
+                  src="/court status/2026-04-18_04.58.38.png" 
+                  alt="Indoor Court" fill className="object-cover"
+                />
+              </div>
+              <div className="absolute bottom-3 left-4 right-4 flex justify-between items-end">
+                <span className="font-mono-custom text-[9px] font-black uppercase text-[#111111]/40">SAC HALL</span>
+                <span className="font-serif-display text-lg text-[#111111]">03</span>
+              </div>
+            </motion.div>
+
+            {/* Card 2 (Middle) */}
+            <motion.div 
+              initial={{ rotate: 6, x: 0 }}
+              whileHover={{ rotate: 15, x: 60, y: -10 }}
+              className="absolute w-[320px] aspect-[3/4] bg-white p-3 pb-12 shadow-2xl rounded-sm z-20 transition-all duration-500 origin-bottom"
+            >
+              <div className="relative w-full h-full overflow-hidden grayscale contrast-125">
+                <Image 
+                  src="/court status/2026-04-18_04.57.28.png" 
+                  alt="Outdoor Court" fill className="object-cover"
+                />
+              </div>
+              <div className="absolute bottom-3 left-4 right-4 flex justify-between items-end">
+                <span className="font-mono-custom text-[9px] font-black uppercase text-[#111111]/40">OUTDOOR COMPLEX</span>
+                <span className="font-serif-display text-lg text-[#111111]">02</span>
+              </div>
+            </motion.div>
+
+            {/* Card 1 (Top) */}
+            <motion.div 
+              initial={{ rotate: 0, y: 0 }}
+              whileHover={{ y: -40 }}
+              className="absolute w-[320px] aspect-[3/4] bg-white p-3 pb-12 shadow-[0_30px_60px_rgba(0,0,0,0.4)] rounded-sm z-30 transition-all duration-500"
+            >
+              <div className="relative w-full h-full overflow-hidden">
+                <Image 
+                  src="/court status/indoor-cricket-practice-4635743.webp" 
+                  alt="Cricket Practice" fill className="object-cover"
+                />
+              </div>
+              <div className="absolute bottom-3 left-4 right-4 flex justify-between items-end">
+                <span className="font-mono-custom text-[9px] font-black uppercase text-accent">PRIMARY FACILITY</span>
+                <span className="font-serif-display text-lg text-[#111111]">01</span>
+              </div>
+              {/* Status Badge */}
+              <div className="absolute top-6 right-6 bg-accent text-white px-3 py-1 font-mono-custom text-[8px] font-black tracking-widest uppercase rounded-full shadow-lg">
+                LIVE
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -308,9 +374,14 @@ export default function CourtStatusPage() {
 
                         <div className="mt-auto pt-6 border-t border-[#111111]/05 flex items-center justify-between">
                           {court.status === 'Available' ? (
-                            <button className="flex items-center gap-2 font-mono-custom text-[10px] uppercase tracking-[0.2em] font-black text-accent hover:gap-3 transition-all">
+                            <a 
+                              href="https://court-booking-assignment.vercel.app"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-2 font-mono-custom text-[10px] uppercase tracking-[0.2em] font-black text-accent hover:gap-3 transition-all"
+                            >
                               BOOK NOW <ChevronRight size={14} />
-                            </button>
+                            </a>
                           ) : court.nextAvailable ? (
                             <div className="flex flex-col">
                               <span className="font-mono-custom text-[8px] uppercase tracking-widest text-[#111111]/40 font-bold">NEXT OPENING</span>

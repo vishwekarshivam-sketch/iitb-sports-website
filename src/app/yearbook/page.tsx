@@ -1,10 +1,11 @@
 'use client';
 
+import CursorGlow from '@/components/CursorGlow';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
-import { Download, ExternalLink, Camera, Trophy, Users } from 'lucide-react';
+import { Download, Camera, Trophy, Users } from 'lucide-react';
 
 const YEARBOOK_CHAPTERS = [
   {
@@ -39,15 +40,24 @@ const MEMORIES = [
 ];
 
 export default function YearbookPage() {
+  const { scrollY } = useScroll();
+  const bgY = useTransform(scrollY, [0, 600], [0, 180]);
+
   return (
-    <div className="min-h-screen bg-cream-topo text-[#111111] selection:bg-accent selection:text-white">
+    <div className="min-h-screen bg-[#F5F0E8] text-[#111111] selection:bg-accent selection:text-white">
       <Navbar />
+      <CursorGlow />
 
-      {/* Grain Overlay */}
-      <div className="fixed inset-0 pointer-events-none z-[100] opacity-[0.03]" 
-           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E")` }} />
-
-      <main className="pt-32 pb-24">
+      <main className="pt-32 pb-24 relative overflow-hidden">
+        {/* Background Typography with Parallax */}
+        <motion.div 
+          style={{ y: bgY }}
+          className="absolute top-20 left-1/2 -translate-x-1/2 select-none pointer-events-none z-0"
+        >
+          <span className="font-condensed font-black text-[25vw] text-[#111111]/[0.02] leading-none uppercase tracking-tighter">
+            YEARBOOK
+          </span>
+        </motion.div>
         {/* Hero Section */}
         <section className="px-6 md:px-12 lg:px-24 mb-32">
           <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row md:items-end justify-between gap-12">
@@ -57,7 +67,7 @@ export default function YearbookPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="font-serif-display text-[clamp(60px,10vw,120px)] leading-[0.9] uppercase tracking-tighter"
+                className="font-serif-display text-[clamp(80px,12vw,180px)] leading-[0.85] uppercase tracking-[-0.04em]"
               >
                 Sports <br /> <span className="normal-case tracking-normal text-accent">Yearbook.</span>
               </motion.h1>

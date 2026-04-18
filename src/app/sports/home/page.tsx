@@ -1,5 +1,6 @@
 'use client';
 
+import CursorGlow from '@/components/CursorGlow';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { AnimatePresence, motion, useScroll, useSpring, useTransform } from 'framer-motion';
@@ -104,12 +105,9 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-[#1C1C1E] text-[#F5F0E8] selection:bg-accent selection:text-black">
       <Navbar />
-      
-      {/* Grain Overlay */}
-      <div className="fixed inset-0 pointer-events-none z-[100] opacity-[0.03]" 
-           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E")` }} />
+      <CursorGlow />
 
-      {/* Section 1 — Hero */}
+      {/* Grain Overlay */}
       <section ref={heroRef} className="relative h-[110vh] flex items-center pt-20 overflow-x-hidden px-6 md:px-12 lg:px-24">
         {/* Background Texture: Graph Paper Ruled Lines */}
         <div className="absolute inset-0 opacity-[0.04] pointer-events-none" 
@@ -392,7 +390,7 @@ export default function HomePage() {
               <div className="mx-auto flex h-full max-w-[1400px] flex-col justify-between">
                 <div>
                   <div className="max-w-6xl">
-                    <span className="block font-serif-display text-[clamp(64px,9vw,120px)] leading-[0.94]">
+                    <span className="block font-serif-display text-accent text-[clamp(64px,9vw,120px)] leading-[0.94]">
                       Your Season,
                     </span>
                     <span className="block font-condensed text-[clamp(64px,9vw,120px)] font-black uppercase leading-[0.94] tracking-[-0.04em]">
@@ -404,7 +402,7 @@ export default function HomePage() {
                 <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
                   {APP_FEATURES.map((feature) => (
                     <div key={feature.number} className="border-t border-[#111111]/10 pt-6">
-                      <div className="mb-4 font-condensed text-6xl font-black leading-none tracking-[-0.05em] text-[#111111]/8">
+                      <div className="mb-4 font-condensed text-6xl font-black leading-none tracking-[-0.05em] text-accent/20">
                         {feature.number}
                       </div>
                       <h3 className="font-condensed text-xl font-black uppercase tracking-[0.08em] text-[#111111]">

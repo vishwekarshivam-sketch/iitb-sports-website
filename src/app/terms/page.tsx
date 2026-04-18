@@ -2,6 +2,7 @@
 
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import CursorGlow from '@/components/CursorGlow';
 import { motion } from 'framer-motion';
 import { FileText, Shield, Scale, Clock, Eye, Lock, Database, UserCheck } from 'lucide-react';
 
@@ -62,10 +63,7 @@ export default function LegalPage() {
   return (
     <div className="min-h-screen bg-cream text-[#111111] selection:bg-accent selection:text-white">
       <Navbar />
-
-      {/* Grain Overlay */}
-      <div className="fixed inset-0 pointer-events-none z-[100] opacity-[0.03]" 
-           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E")` }} />
+      <CursorGlow />
 
       <main className="pt-32 pb-24 px-6 md:px-12 lg:px-24">
         <div className="max-w-[1400px] mx-auto">
