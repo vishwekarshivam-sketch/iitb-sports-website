@@ -58,7 +58,9 @@ export default function SportsDirectoryPage() {
             ref={videoRef}
             autoPlay
             muted
+            loop
             playsInline
+            preload="metadata"
             className="h-full w-full object-cover"
             style={{ filter: 'saturate(0.65) contrast(1.1)' }}
           >

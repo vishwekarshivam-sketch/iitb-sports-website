@@ -71,6 +71,14 @@ export default function HomePage() {
   const panelStackRef = useRef<HTMLElement | null>(null);
   const activeEvent = HERO_EVENTS[activeEventIndex];
 
+  // Preload all carousel images on mount so swaps are instant
+  useEffect(() => {
+    HERO_EVENTS.forEach((e) => {
+      const img = new window.Image();
+      img.src = e.image;
+    });
+  }, []);
+
   useEffect(() => {
     const interval = window.setInterval(() => {
       setActiveEventIndex((index) => (index + 1) % HERO_EVENTS.length);
@@ -95,15 +103,15 @@ export default function HomePage() {
   const panelThreeSpring = useSpring(panelThreeProgress, { stiffness: 110, damping: 30, mass: 0.9 });
   const panelTwoY = useTransform(panelTwoSpring, (value) => `${value}%`);
   const panelThreeY = useTransform(panelThreeSpring, (value) => `${value}%`);
-  const aboutOpacity = useTransform(panelProgress, [0, 0], [1, 1]);
-  const aboutContentY = useTransform(panelProgress, [0, 0], [0, 0]);
-  const blackCatsOpacity = useTransform(panelProgress, [0, 0], [1, 1]);
-  const blackCatsContentY = useTransform(panelProgress, [0, 0], [0, 0]);
-  const appOpacity = useTransform(panelProgress, [0, 0], [1, 1]);
-  const appContentY = useTransform(panelProgress, [0, 0], [0, 0]);
 
   return (
     <div className="min-h-screen bg-[#1C1C1E] text-[#F5F0E8] selection:bg-accent selection:text-black">
+      <motion.div
+        className="fixed inset-0 z-[100] bg-black pointer-events-none"
+        initial={{ opacity: 1 }}
+        animate={{ opacity: 0 }}
+        transition={{ duration: 0.7, ease: 'easeOut' }}
+      />
       <Navbar />
       <CursorGlow />
 
@@ -196,7 +204,7 @@ export default function HomePage() {
                       alt={`${activeEvent.title} event`}
                       fill
                       priority
-                      sizes="(min-width: 1024px) 40vw, 90vw"
+                      sizes="(min-width: 1280px) 38vw, (min-width: 1024px) 42vw, 92vw"
                       onError={(event) => {
                         event.currentTarget.src = '/swimming.jpeg';
                       }}
@@ -286,10 +294,7 @@ export default function HomePage() {
           {/* Panel 1 — About Us */}
           <section className="absolute inset-0 z-10 bg-[#F5F0E8] text-[#111111]">
             <div className="absolute top-0 left-0 right-0 h-px bg-[#111111]/10" />
-            <motion.div
-              style={{ opacity: aboutOpacity, y: aboutContentY }}
-              className="h-full px-6 pt-28 pb-14 md:px-12 lg:px-24"
-            >
+            <div className="h-full px-6 pt-28 pb-14 md:px-12 lg:px-24">
               <div className="mx-auto grid h-full max-w-[1400px] gap-12 lg:grid-cols-12 lg:gap-20">
                 <div className="relative flex flex-col justify-center lg:col-span-5">
                   <div className="relative w-full max-w-[360px]">
@@ -329,7 +334,7 @@ export default function HomePage() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </section>
 
           {/* Panel 2 — Bombay BlackCats */}
@@ -342,14 +347,12 @@ export default function HomePage() {
                 alt="IIT Bombay Black Cats logo"
                 fill
                 priority={false}
+                sizes="72vw"
                 className="object-contain object-right opacity-[0.28] contrast-125 brightness-110"
               />
             </div>
             <div className="absolute bottom-0 left-[23%] top-0 hidden w-[2px] bg-accent/20 lg:block" />
-            <motion.div
-              style={{ opacity: blackCatsOpacity, y: blackCatsContentY }}
-              className="relative z-10 flex h-full items-center px-6 pt-20 pb-10 md:px-12 lg:px-24"
-            >
+            <div className="relative z-10 flex h-full items-center px-6 pt-20 pb-10 md:px-12 lg:px-24">
               <div className="mx-auto grid w-full max-w-[1400px] gap-8 lg:grid-cols-12">
                 <div className="lg:col-span-7 lg:col-start-2">
                   <h2 className="mb-8 font-serif-display text-[clamp(72px,10vw,140px)] leading-[0.92] tracking-[-0.04em] text-[#F5F0E8]">
@@ -376,17 +379,14 @@ export default function HomePage() {
                   </Link>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </motion.section>
 
           {/* Panel 3 — Sports App */}
           <motion.section style={{ y: panelThreeY }} className="absolute inset-0 z-30 bg-white text-[#111111]">
             <div className="absolute left-0 top-0 right-0 h-1 bg-accent" />
             <div className="absolute bottom-0 right-10 top-0 hidden w-[2px] bg-accent md:block" />
-            <motion.div
-              style={{ opacity: appOpacity, y: appContentY }}
-              className="h-full px-6 pt-28 pb-14 md:px-12 lg:px-24"
-            >
+            <div className="h-full px-6 pt-28 pb-14 md:px-12 lg:px-24">
               <div className="mx-auto flex h-full max-w-[1400px] flex-col justify-between">
                 <div>
                   <div className="max-w-6xl">
@@ -430,7 +430,7 @@ export default function HomePage() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </motion.section>
         </div>
       </section>

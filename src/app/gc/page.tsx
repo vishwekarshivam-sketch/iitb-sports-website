@@ -39,34 +39,34 @@ export default function GCPage() {
         {/* Hostel Image Grid Background */}
         <div className="absolute inset-0 z-0 grid grid-cols-12 grid-rows-6 gap-2 opacity-45">
           <div className="col-span-4 row-span-6 relative">
-            <Image 
-              src="/hostel pics/174592244_573505810708871_1645670021528088598_n.jpg" 
-              alt="Hostel life" fill className="object-cover saturate-[0.2] hover:saturate-100 transition-all duration-1000"
+            <Image
+              src="/hostel pics/174592244_573505810708871_1645670021528088598_n.jpg"
+              alt="Hostel life" fill priority sizes="33vw" className="object-cover saturate-[0.2] hover:saturate-100 transition-all duration-1000"
             />
           </div>
           <div className="col-span-5 row-span-3 relative">
-            <Image 
-              src="/hostel pics/36_big.jpg" 
-              alt="IITB Hostel" fill className="object-cover saturate-[0.2] hover:saturate-100 transition-all duration-1000"
+            <Image
+              src="/hostel pics/36_big.jpg"
+              alt="IITB Hostel" fill loading="lazy" sizes="42vw" className="object-cover saturate-[0.2] hover:saturate-100 transition-all duration-1000"
             />
           </div>
           <div className="col-span-3 row-span-4 relative">
-            <Image 
-              src="/hostel pics/94319743_711701622900243_6699078729796310141_n.jpg" 
-              alt="Hostel building" fill className="object-cover saturate-[0.2] hover:saturate-100 transition-all duration-1000"
+            <Image
+              src="/hostel pics/94319743_711701622900243_6699078729796310141_n.jpg"
+              alt="Hostel building" fill loading="lazy" sizes="25vw" className="object-cover saturate-[0.2] hover:saturate-100 transition-all duration-1000"
             />
           </div>
           <div className="col-span-5 row-span-3 relative">
-            <Image 
-              src="/hostel pics/IIT5.JPEGWNP4.jpg" 
-              alt="Hostel campus" fill className="object-cover saturate-[0.2] hover:saturate-100 transition-all duration-1000"
+            <Image
+              src="/hostel pics/IIT5.JPEGWNP4.jpg"
+              alt="Hostel campus" fill loading="lazy" sizes="42vw" className="object-cover saturate-[0.2] hover:saturate-100 transition-all duration-1000"
             />
           </div>
           <div className="col-span-3 row-span-2 relative">
              <div className="absolute inset-0 bg-accent/20 mix-blend-overlay" />
-             <Image 
-              src="/hostel pics/36_big.jpg" 
-              alt="Hostel detail" fill className="object-cover saturate-0 opacity-50"
+             <Image
+              src="/hostel pics/36_big.jpg"
+              alt="Hostel detail" fill loading="lazy" sizes="25vw" className="object-cover saturate-0 opacity-50"
             />
           </div>
         </div>
@@ -343,7 +343,7 @@ export default function GCPage() {
             key={`${activeSport}-${activeGender}`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="grid grid-cols-1 md:grid-cols-12 bg-white/05 backdrop-blur-sm border border-white/10 rounded-3xl overflow-hidden"
+            className="grid grid-cols-1 md:grid-cols-12 bg-white/05 border border-white/10 rounded-3xl overflow-hidden"
           >
             <div className="md:col-span-12 bg-[#0a0a0a] p-6 font-condensed font-black text-sm uppercase tracking-[0.5em] text-white/20 text-center border-b border-white/05">
               {activeSport.toUpperCase()} CHAMPIONSHIP 2024 ({activeGender})

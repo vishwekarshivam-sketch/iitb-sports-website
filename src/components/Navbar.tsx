@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const NAV_LINKS = [
   { name: 'Home', href: '/sports/home' },
@@ -59,10 +59,11 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 px-6 md:px-12 h-20 flex items-center justify-between bg-white/95 backdrop-blur-md shadow-[0_1px_20px_rgba(0,0,0,0.08)] ${isNavVisible || mobileMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}
+        aria-label="Main Navigation"
+        className={`fixed top-0 left-0 right-0 z-50 transition-[transform,opacity] duration-500 px-6 md:px-12 h-20 flex items-center justify-between bg-white/95 backdrop-blur-md shadow-[0_1px_20px_rgba(0,0,0,0.08)] ${isNavVisible || mobileMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}
       >
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 group">
+        <Link href="/" className="flex items-center gap-3 group" aria-label="Go to homepage">
           <div className="relative h-14 w-[178px] md:w-[190px]">
             <Image
               src="/assets/iit-bombay-sports-logo-nav.svg"
@@ -82,15 +83,11 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className={`text-[13px] font-medium transition-all duration-300 relative py-1 group text-black/60 hover:text-black ${isActive ? 'text-black font-semibold' : ''}`}
+                className={`text-[13px] font-medium relative py-1 group text-black/60 hover:text-black transition-colors duration-300
+                  after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-accent after:transition-[width] after:duration-300
+                  ${isActive ? 'text-black font-semibold after:w-full' : 'after:w-0 hover:after:w-full'}`}
               >
                 {link.name}
-                <motion.div
-                  initial={false}
-                  animate={{ width: isActive ? '100%' : '0%' }}
-                  className="absolute -bottom-1 left-0 h-[2px] bg-accent"
-                />
-                <div className="absolute -bottom-1 left-0 w-0 h-[2px] bg-accent transition-all duration-300 group-hover:w-full" />
               </Link>
             );
           })}
@@ -102,7 +99,7 @@ export default function Navbar() {
             href={COURT_BOOKING_URL}
             target="_blank"
             rel="noreferrer"
-            className="hidden md:block bg-accent hover:bg-[#A3501F] text-black text-[12px] font-bold py-2.5 px-6 rounded-full transition-all duration-300 shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
+            className="hidden md:block bg-accent hover:bg-[#A3501F] text-black text-[12px] font-bold py-2.5 px-6 rounded-full transition-[background-color,box-shadow,transform] duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5"
           >
             BOOK A COURT
           </a>
@@ -111,6 +108,8 @@ export default function Navbar() {
           <button 
             className="xl:hidden flex flex-col gap-1.5 p-2"
             onClick={() => setMobileMenuOpen(true)}
+            aria-label="Open navigation menu"
+            aria-expanded={mobileMenuOpen}
           >
             <div className={`w-6 h-0.5 transition-colors ${isScrolled ? 'bg-black' : 'bg-[#111111]'}`} />
             <div className={`w-6 h-0.5 transition-colors ${isScrolled ? 'bg-black' : 'bg-[#111111]'}`} />
@@ -127,6 +126,9 @@ export default function Navbar() {
             exit={{ opacity: 0, x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
             className="fixed inset-0 z-[60] bg-[#111111] p-8 flex flex-col justify-between"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile Navigation Menu"
           >
             <div>
               <div className="flex justify-between items-center mb-16">
@@ -134,6 +136,7 @@ export default function Navbar() {
                 <button 
                   className="text-white text-4xl p-2"
                   onClick={() => setMobileMenuOpen(false)}
+                  aria-label="Close navigation menu"
                 >
                   ×
                 </button>

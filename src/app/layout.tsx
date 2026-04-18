@@ -6,35 +6,66 @@ const iitbSportDisplay = localFont({
   src: "./fonts/IITBSport-Display.woff2",
   variable: "--font-iitb-display",
   weight: "800",
+  display: "swap",
 });
 
 const iitbSportHeading = localFont({
   src: "./fonts/IITBSport-Heading.woff2",
   variable: "--font-iitb-heading",
   weight: "600",
+  display: "swap",
 });
 
 const iitbSportText = localFont({
   src: "./fonts/IITBSport-Text.woff2",
-  variable: "--font-iitb-display-text", // renamed to avoid conflict if any
+  variable: "--font-iitb-display-text",
   weight: "400",
+  display: "swap",
 });
 
 const iitbSportMono = localFont({
   src: "./fonts/IITBSport-Mono.woff2",
   variable: "--font-iitb-mono",
   weight: "700",
+  display: "swap",
 });
 
 const iitbSportCaption = localFont({
   src: "./fonts/IITBSport-Caption.woff2",
   variable: "--font-iitb-caption",
   weight: "300",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://sports.iitb.ac.in"),
   title: "IITB Sports | Athletes Only",
   description: "IIT Bombay Sports — Powering 10,000+ students across 40+ disciplines since 1958.",
+  openGraph: {
+    title: "IITB Sports | Athletes Only",
+    description: "IIT Bombay Sports — Powering 10,000+ students across 40+ disciplines since 1958.",
+    url: "https://sports.iitb.ac.in",
+    siteName: "IIT Bombay Sports",
+    images: [
+      {
+        url: "/gymkhana.webp",
+        width: 1200,
+        height: 630,
+        alt: "IIT Bombay Sports",
+      },
+    ],
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "IITB Sports | Athletes Only",
+    description: "IIT Bombay Sports — Powering 10,000+ students across 40+ disciplines since 1958.",
+    images: ["/gymkhana.webp"],
+  },
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
@@ -51,9 +82,9 @@ export default function RootLayout({
       ${iitbSportCaption.variable}
     `}>
       <body className="antialiased">
-        {/* Global Noise + Grain Texture Layer */}
-        <div className="fixed inset-0 pointer-events-none z-[100] opacity-[0.03]" 
-             style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E")` }} />
+        {/* Global Grain Texture — static PNG tile, GPU-uploaded once, no live SVG filter */}
+        <div className="fixed inset-0 pointer-events-none z-[100] opacity-[0.4] mix-blend-overlay"
+             style={{ backgroundImage: 'url(/noise.png)', backgroundSize: '64px 64px' }} />
         {children}
       </body>
     </html>

@@ -131,8 +131,9 @@ export default function YearbookPage() {
 
                   <div className="flex flex-wrap gap-6 pt-10">
                     <a 
-                      href="https://gymkhana.iitb.ac.in/sports/yearbook.pdf" 
+                      href="https://gymkhana.iitb.ac.in/sports/yearbook.pdf"
                       target="_blank"
+                      rel="noopener noreferrer"
                       className="inline-flex items-center gap-4 bg-[#111111] text-white px-12 py-6 rounded-full font-condensed font-black text-xl uppercase tracking-widest hover:bg-accent transition-all transform hover:-translate-y-1 shadow-xl"
                     >
                       READ THE FULL RECORD <Download size={22} />

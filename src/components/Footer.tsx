@@ -52,8 +52,8 @@ export default function Footer() {
 
           {/* Links */}
           <div className="grid grid-cols-2 lg:col-span-3 gap-12">
-            <div>
-              <h4 className="font-mono-custom text-accent text-[10px] uppercase tracking-[0.4em] mb-10 font-black">Main Directory</h4>
+            <nav aria-labelledby="footer-main-directory">
+              <h4 id="footer-main-directory" className="font-mono-custom text-accent text-[10px] uppercase tracking-[0.4em] mb-10 font-black">Main Directory</h4>
               <ul className="space-y-4 font-condensed font-black text-xl text-[#F5F0E8]/60 uppercase tracking-wider">
                 {[
                   { label: 'Home', href: '/sports/home' },
@@ -66,26 +66,26 @@ export default function Footer() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </nav>
 
-            <div>
-              <h4 className="font-mono-custom text-accent text-[10px] uppercase tracking-[0.4em] mb-10 font-black">Resources</h4>
+            <nav aria-labelledby="footer-resources">
+              <h4 id="footer-resources" className="font-mono-custom text-accent text-[10px] uppercase tracking-[0.4em] mb-10 font-black">Resources</h4>
               <ul className="space-y-4 font-condensed font-black text-xl text-[#F5F0E8]/60 uppercase tracking-wider">
                 {[
                   { label: 'Yearbook', href: '/yearbook' },
                   { label: 'Blogs', href: '/blogs' },
                   { label: 'Events', href: '/events' },
-                  { label: 'Booking', href: '/booking' },
+                  { label: 'Booking', href: 'https://court-booking-assignment.vercel.app' },
                 ].map(({ label, href }) => (
                   <li key={label} className="hover:text-white transition-colors">
-                    <Link href={href}>{label}</Link>
+                    <Link href={href} {...(href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>{label}</Link>
                   </li>
                 ))}
               </ul>
-            </div>
+            </nav>
 
-            <div>
-              <h4 className="font-mono-custom text-accent text-[10px] uppercase tracking-[0.4em] mb-10 font-black">Information</h4>
+            <nav aria-labelledby="footer-information">
+              <h4 id="footer-information" className="font-mono-custom text-accent text-[10px] uppercase tracking-[0.4em] mb-10 font-black">Information</h4>
               <ul className="space-y-4 font-condensed font-black text-xl text-[#F5F0E8]/60 uppercase tracking-wider">
                 {[
                   { label: 'Contact', href: '/contact' },
@@ -98,7 +98,7 @@ export default function Footer() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </nav>
           </div>
         </div>
 

@@ -8,6 +8,7 @@
 }
 
 :root {
+  scroll-behavior: smooth;
   --background: #000000;
   --foreground: #ffffff;
   --bg-overlay: rgba(0, 0, 0, 0.6);

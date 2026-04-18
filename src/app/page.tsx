@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { InstagramIcon, LinkedinIcon, FacebookIcon } from '@/components/SocialIcons';
@@ -24,26 +24,28 @@ export default function LandingPage() {
   const [wordIndex, setWordIndex] = useState(0);
   const [hasStartedCycling, setHasStartedCycling] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
+  const [isExiting, setIsExiting] = useState(false);
   const router = useRouter();
+  const triggeredRef = useRef(false);
+
+  const triggerExit = () => {
+    if (triggeredRef.current) return;
+    triggeredRef.current = true;
+    setIsExiting(true);
+    setTimeout(() => router.push('/sports/home'), 700);
+  };
 
   // Navigate to sports/home when user scrolls down past hero
   useEffect(() => {
-    let triggered = false;
     const handleWheel = (e: WheelEvent) => {
-      if (e.deltaY > 40 && !triggered) {
-        triggered = true;
-        router.push('/sports/home');
-      }
+      if (e.deltaY > 40) triggerExit();
     };
     const handleTouch = (() => {
       let startY = 0;
       return {
         start: (e: TouchEvent) => { startY = e.touches[0].clientY; },
         end: (e: TouchEvent) => {
-          if (startY - e.changedTouches[0].clientY > 50 && !triggered) {
-            triggered = true;
-            router.push('/sports/home');
-          }
+          if (startY - e.changedTouches[0].clientY > 50) triggerExit();
         },
       };
     })();
@@ -55,31 +57,44 @@ export default function LandingPage() {
       window.removeEventListener('touchstart', handleTouch.start);
       window.removeEventListener('touchend', handleTouch.end);
     };
-  }, [router]);
-
-  useEffect(() => {
-    const startTimer = setTimeout(() => setHasStartedCycling(true), 1200);
-    return () => clearTimeout(startTimer);
   }, []);
 
   useEffect(() => {
-    if (!hasStartedCycling || isFinished) return;
-    const interval = setInterval(() => {
-      setWordIndex((prev) => {
-        if (prev === CYCLING_WORDS.length - 1) { setIsFinished(true); clearInterval(interval); return prev; }
-        return prev + 1;
-      });
-    }, 540);
-    return () => clearInterval(interval);
-  }, [hasStartedCycling, isFinished]);
+    let interval: ReturnType<typeof setInterval>;
+    const startTimer = setTimeout(() => {
+      setHasStartedCycling(true);
+      interval = setInterval(() => {
+        setWordIndex((prev) => {
+          if (prev === CYCLING_WORDS.length - 1) {
+            setIsFinished(true);
+            clearInterval(interval);
+            return prev;
+          }
+          return prev + 1;
+        });
+      }, 540);
+    }, 1200);
+    return () => {
+      clearTimeout(startTimer);
+      clearInterval(interval);
+    };
+  }, []);
 
   return (
     <main className="relative h-screen w-full overflow-hidden bg-black text-white selection:bg-accent selection:text-black">
       <CursorGlow />
 
+      {/* Exit fade overlay */}
+      <motion.div
+        className="absolute inset-0 z-50 bg-black pointer-events-none"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isExiting ? 1 : 0 }}
+        transition={{ duration: 0.65, ease: 'easeInOut' }}
+      />
+
       {/* Video */}
       <div className="absolute inset-0 z-0">
-        <video autoPlay muted loop playsInline className="h-full w-full object-cover"
+        <video autoPlay muted loop playsInline preload="metadata" poster="/gymkhana.webp" className="h-full w-full object-cover"
           style={{ filter: 'saturate(0.7) contrast(1.05)' }}>
           <source src="/hero-bg.mp4" type="video/mp4" />
         </video>
@@ -182,6 +197,23 @@ export default function LandingPage() {
         </div>
 
       </div>
+
+      {/* Scroll indicator */}
+      <motion.button
+        onClick={triggerExit}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isFinished ? 1 : 0 }}
+        transition={{ duration: 1, delay: 0.3 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 cursor-pointer group"
+        aria-label="Enter site"
+      >
+        <span className="font-mono-custom text-[9px] tracking-[0.3em] uppercase text-white/40 group-hover:text-white/70 transition-colors">SCROLL</span>
+        <motion.div
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+          className="w-px h-8 bg-gradient-to-b from-white/40 to-transparent"
+        />
+      </motion.button>
     </main>
   );
 }
