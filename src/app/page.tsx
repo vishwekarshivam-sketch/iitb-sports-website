@@ -92,12 +92,10 @@ export default function LandingPage() {
         transition={{ duration: 0.65, ease: 'easeInOut' }}
       />
 
-      {/* Video */}
+      {/* Background image */}
       <div className="absolute inset-0 z-0">
-        <video autoPlay muted loop playsInline preload="metadata" poster="/gymkhana.webp" className="h-full w-full object-cover"
-          style={{ filter: 'saturate(0.7) contrast(1.05)' }}>
-          <source src="/hero-bg.mp4" type="video/mp4" />
-        </video>
+        <Image src="/gymkhana.webp" alt="IITB Gymkhana grounds" fill priority className="object-cover object-center"
+          style={{ filter: 'saturate(0.7) contrast(1.05)' }} />
         {/* Cinematic letterbox gradient — heavy bottom, lighter top */}
         <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.15) 60%, rgba(0,0,0,0.75) 100%)' }} />
         {/* Vignette edges */}

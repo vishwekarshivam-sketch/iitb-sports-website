@@ -3,7 +3,6 @@
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import Image from 'next/image';
 import { useMemo, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { BASE_EVENTS, SPORT_CATEGORIES, MONTH_NAMES, DAY_NAMES } from '@/lib/data/events';
@@ -115,15 +114,12 @@ function EventsContent() {
           </span>
         </motion.div>
 
-        <Image
-          src="/gymkhana.webp"
-          alt="IITB Gymkhana grounds"
-          fill
-          className="object-cover object-center"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#0d0d0d]/85 to-[#0d0d0d]/60" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0d0d0d]/80 via-transparent to-[#0d0d0d]/40" />
+        <video autoPlay muted loop playsInline preload="metadata" poster="/gymkhana.webp" className="absolute inset-0 h-full w-full object-cover object-center"
+          style={{ filter: 'saturate(0.7) contrast(1.05)' }}>
+          <source src="/hero-bg.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#0d0d0d]/65 to-[#0d0d0d]/35" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0d0d0d]/60 via-transparent to-[#0d0d0d]/20" />
 
         {/* Calendar week grid */}
         <div className="absolute bottom-0 left-0 right-0 flex items-end justify-between px-6 md:px-12 lg:px-24 pointer-events-none select-none overflow-hidden" style={{ height: '65%' }}>
